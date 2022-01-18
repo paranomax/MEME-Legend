@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeuxVideo-MemeLegend", "JeuxVideo-MemeLegend.csproj", "{900A1598-B760-4A16-9024-81BD2E2A076D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{900A1598-B760-4A16-9024-81BD2E2A076D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{900A1598-B760-4A16-9024-81BD2E2A076D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{900A1598-B760-4A16-9024-81BD2E2A076D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{900A1598-B760-4A16-9024-81BD2E2A076D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D68841A-A3D5-4393-B405-AAD04A1B2A98}
+	EndGlobalSection
+EndGlobal

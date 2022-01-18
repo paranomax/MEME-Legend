@@ -1,0 +1,25 @@
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\bin\Debug\JeuxVideo-MemeLegend.exe.config
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\bin\Debug\JeuxVideo-MemeLegend.exe
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\bin\Debug\JeuxVideo-MemeLegend.pdb
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.csprojAssemblyReference.cache
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.fPrincipale.resources
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.Properties.Resources.resources
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.csproj.GenerateResource.cache
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.csproj.CoreCompileInputs.cache
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.exe
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.pdb
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.EcranSelection.resources
+C:\Users\paran\Desktop\progra evenmentiel\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.EcranCombat.resources
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\bin\Debug\JeuxVideo-MemeLegend.exe.config
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\bin\Debug\JeuxVideo-MemeLegend.exe
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\bin\Debug\JeuxVideo-MemeLegend.pdb
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.csproj.AssemblyReference.cache
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.EcranCombat.resources
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.EcranSelection.resources
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.fPrincipale.resources
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.Properties.Resources.resources
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.csproj.GenerateResource.cache
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.csproj.CoreCompileInputs.cache
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.exe
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.pdb
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.ficConnection.resources
