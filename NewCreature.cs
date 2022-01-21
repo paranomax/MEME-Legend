@@ -10,32 +10,82 @@ using System.Windows.Forms;
 
 namespace JeuxVideo_MemeLegend
 {
-    public class Creature
+    public class NewCreature
     {
         public String Nom, Type;
         public int i;
         public Capacite[] techniques = new Capacite[4];
-        public Dictionary<string, Capacite> ListCapacite;
-        
+        public string[] capacite = new string[4];
+        public static Dictionary<string, Capacite> ListCapacite = new Dictionary<string, Capacite>()
+        {
+            {"trempette", new Capacite("trempette", "Neutre", 0, 1, false, 1) },
+            {"comeback", new Capacite("Come back des muppets", "Normal", 70, 0, false, 2) },
+            {"Showbiz", new Capacite("Showbiz", "Neutre", 0, 2, false, 3) },
+            {"Lancethe", new Capacite("Lance-Thé", "Eau", 65, 0, true, 4) },
+            {"RageOn", new Capacite("Rage-On", "Psy", 0, 3, true, 5) },
+            {"SmugFace", new Capacite("Smug Face", "Neutre", 0, 4, true, 6) },
+            {"CyberHarcel", new Capacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },
+            {"Invest", new Capacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },
+            {"LanceFlam", new Capacite("Lance-Flamme", "Feu", 65, 0, true, 9) },
+            {"MeteorTesla", new Capacite("Météor Tesla", "Milliardaire", 80, 6, true, 10) },
+            {"ClaqueLias", new Capacite("Claque de Liasse", "Milliardaire", 60, 0, false, 11) },
+            {"Weed",new Capacite("Weed?", "Poison", 75, 7, true, 12) },
+            {"NuageTox", new Capacite("Nuage Toxique", "Poison", 65, 0, true, 13) },
+            {"Feat", new Capacite("Feat", "Neutre", 0, 8, false, 14) },
+            {"TuAime", new Capacite("Tu aime ça ?", "Normal", 30, 9, true, 15) },
+            {"puissance", new Capacite("Puissance", "Combat", 0, 10, false, 16) },
+            {"CloseCombat", new Capacite("Close Combat", "Combat", 80, 11, false, 17) },
+            {"Seduction",new Capacite("Séduction", "Neutre", 0, 12, true, 18) },
+            {"SilenceWench", new Capacite("Silence Wench", "Normal", 70, 0, false, 19) },
+            {"Angery", new Capacite("Angery", "Neutre", 0, 13, false, 20) },
+            {"ShibeIs", new Capacite("Shibe Is King", "Neutre", 0, 14, false, 21) },
+            {"CopyClaim", new Capacite("CopyClaim", "Copyright", 60, 15, true, 22) },
+            {"noPants", new Capacite("No Pants", "Neutre", 0, 13, false, 23) },
+            {"ClaqueBec", new Capacite("Claque Bec", "Normal", 65, 0, false, 24) },
+            {"WorldOnFire", new Capacite("World On Fire", "Feu", 30, 16, true, 25)},
+            {"SacrificeForL", new Capacite("Sacrifice For The Lords", "Feu", 80, 0, true, 26)},
+            {"PurificationInFire", new Capacite("Purification In Fire", "Neutre", 0, 17, false, 27) },
+            {"Waahaha", new Capacite("Waahaha", "Inconnue", 10, 14, true, 28) },
+            {"Heyeahyeah", new Capacite("Heyeahyeahyeah", "Inconnu", 40, 19, false, 30) },
+            {"WaluigiTime", new Capacite("Waluigi Time !", "Inconnu", 20, 18, true, 29) },
+            {"Smash", new Capacite("Smash", "Inconnu", 70, 0, false, 31)},
+            {"NeRienFaire", new Capacite("ne rien faire", "Normal", 0, 0, false, 0) }
+        };
+
 
         private int HP_, HPMax_, Attaque_, AttaqueSpec_, Defense_, DefenseSpec_;
 
         #region constructeur
-        public Creature(string Nom, String Type, int HP, int HPMax, int Attaque, int AttaqueSpec, int Defense, int DefenseSpec, int[] IDcapacite)
+        public NewCreature(string Nom, String Type, int HP, int HPMax, int Attaque, int AttaqueSpec, int Defense, int DefenseSpec, string[] IDcapacite)
         {
             this.Nom = Nom;
             this.Type = Type;
-                  
+
             this.HPMax = HPMax;
             this.HP = HP;
             this.Attaque = Attaque;
             this.AttaqueSpec = AttaqueSpec;
             this.Defense = Defense;
             this.DefenseSpec = DefenseSpec;
-
-            for(i =0; i<4; i++)
+            for(i=0; i < 4; i++)
             {
-                switch(IDcapacite[i])
+
+                if (ListCapacite.ContainsKey(IDcapacite[i]))
+                {
+                    techniques[i] = ListCapacite[IDcapacite[i]];
+                    capacite[i] = IDcapacite[i];
+                }
+                else
+                {
+                    techniques[i] = ListCapacite["NeRienFaire"];
+                    capacite[i] = "NeRienFaire";
+                }
+                    
+            }
+
+            /*for (i = 0; i < 4; i++)
+            {
+                switch (IDcapacite[i])
                 {
                     case 1:
                         trempette();
@@ -130,11 +180,11 @@ namespace JeuxVideo_MemeLegend
                     case 31:
                         Smash();
                         break;
-                    default:                       
+                    default:
                         nerienfaire();
                         break;
                 }
-            }
+            }*/
 
         }
         #endregion
@@ -144,9 +194,9 @@ namespace JeuxVideo_MemeLegend
         public int HP
         {
             get { return HP_; }
-            set 
+            set
             {
-                if (value < 0) 
+                if (value < 0)
                     this.HP_ = 0;
                 else if (value > HPMax)
                     this.HP_ = HPMax;
@@ -206,7 +256,7 @@ namespace JeuxVideo_MemeLegend
         }
 
         #endregion
-
+        /*
         #region capacité
         private void nerienfaire()
         {
@@ -250,7 +300,7 @@ namespace JeuxVideo_MemeLegend
 
         private void Invest()
         {
-            techniques[i] = new Capacite("Investissement", "Neutre", 0, 5, true, 8);
+            
         }
 
         private void LanceFlam()
@@ -335,7 +385,7 @@ namespace JeuxVideo_MemeLegend
 
         private void WorldOnFire()
         {
-            techniques[i] = new Capacite("World On Fire", "Feu", 30, 16, true, 25 );
+            techniques[i] = new Capacite("World On Fire", "Feu", 30, 16, true, 25);
         }
 
         private void SacrificeForL()
@@ -345,7 +395,7 @@ namespace JeuxVideo_MemeLegend
 
         private void PurificationInFire()
         {
-            techniques[i] = new Capacite("Purification In Fire", "Neutre", 0, 17, false, 27 );
+            techniques[i] = new Capacite("Purification In Fire", "Neutre", 0, 17, false, 27);
         }
 
         private void Waahaha()
@@ -369,6 +419,6 @@ namespace JeuxVideo_MemeLegend
         }
 
         #endregion
-
+        */
     }
 }

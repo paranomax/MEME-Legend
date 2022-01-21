@@ -118,7 +118,7 @@ namespace JeuxVideo_MemeLegend
 
         private void bOnline_Click(object sender, EventArgs e)
         {
-            ficConnection f = new ficConnection();
+            ficSelectionOnline f = new ficSelectionOnline();
             Hide();
             f.ShowDialog();
             Show();

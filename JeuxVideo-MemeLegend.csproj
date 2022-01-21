@@ -84,16 +84,23 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewCreature.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FicCombat.resx">
       <DependentUpon>FicCombat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ficCombatOnline.resx">
+      <DependentUpon>ficCombatOnline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ficConnection.resx">
       <DependentUpon>ficConnection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ficSelection.resx">
       <DependentUpon>ficSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ficSelectionOnline.resx">
+      <DependentUpon>ficSelectionOnline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

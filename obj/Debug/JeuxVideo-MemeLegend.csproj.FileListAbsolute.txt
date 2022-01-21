@@ -23,3 +23,5 @@ C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.c
 C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.exe
 C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo-MemeLegend.pdb
 C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.ficConnection.resources
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.ficSelectionOnline.resources
+C:\Users\paran\Desktop\IS3\JeuxVideo-MemeLegend\obj\Debug\JeuxVideo_MemeLegend.ficCombatOnline.resources

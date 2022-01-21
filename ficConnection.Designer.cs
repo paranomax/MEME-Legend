@@ -101,6 +101,7 @@ namespace JeuxVideo_MemeLegend
             this.MinimizeBox = false;
             this.Name = "ficConnection";
             this.Text = "Ecran de connexion";
+            this.Load += new System.EventHandler(this.ficConnection_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

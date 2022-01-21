@@ -44,5 +44,10 @@ namespace JeuxVideo_MemeLegend
                 MessageBox.Show("erreur de configuration");
            
         }
+
+        private void ficConnection_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
