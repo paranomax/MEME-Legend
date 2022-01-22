@@ -21,6 +21,7 @@ namespace JeuxVideo_MemeLegend
         private Socket sServeur, sClient;
         private byte[] bBuffer;
         private string[] Message;
+        private string Messagecomplet;
         NewCreature[] joueur1 = new NewCreature[3];
         NewCreature[] joueur2 = new NewCreature[3];
         bool tour = true; //true -> j1 false => j2
@@ -34,7 +35,7 @@ namespace JeuxVideo_MemeLegend
             sServeur = null;
             sClient = null;
             
-            this.Status = Status;
+            this.Status = Status;//vrai serveur //faux client
             foreach(NewCreature c in joueur1){
                 lbJ1.Items.Add(c.Nom);
             }
@@ -97,14 +98,14 @@ namespace JeuxVideo_MemeLegend
             sServeur.BeginAccept(new AsyncCallback(SurDemandeConnexion), sServeur);
         }
 
-        private void SurDemandeConnexion(IAsyncResult iAR)
+        private void SurDemandeConnexion(IAsyncResult iAR) //etabli connection
         {
             if (sServeur != null)
             {
                 Socket sTmp = (Socket)iAR.AsyncState;
                 sClient = sTmp.EndAccept(iAR);
-                //sClient.Send(Encoding.Unicode.GetBytes("connexion effectué par " + ((IPEndPoint)sClient.RemoteEndPoint).Address.ToString()));
-                sClient.Send(Encoding.Unicode.GetBytes("a"));
+                sClient.Send(Encoding.Unicode.GetBytes("a/a/a"));
+                //sClient.Send(Encoding.Unicode.GetBytes("a/"));
                 InitialiserReception(sClient);
             }
         }
@@ -112,13 +113,15 @@ namespace JeuxVideo_MemeLegend
         private void InitialiserReception(Socket soc)
         {
             
-            soc.BeginReceive(bBuffer, 0, bBuffer.Length, SocketFlags.None, new AsyncCallback(Reception), soc);
+            soc.BeginReceive(bBuffer, 0, bBuffer.Length, SocketFlags.None, new AsyncCallback(Reception), soc); 
 
 
         }
 
         private void Reception(IAsyncResult iAR)
         {
+
+            //MessageBox.Show("reception");
             if (sClient != null)
             {
                 Socket tmp = (Socket)iAR.AsyncState;
@@ -129,20 +132,13 @@ namespace JeuxVideo_MemeLegend
                     //lbEchange.Items.Insert(0, Encoding.Unicode.GetString(bBuffer));
                     //bBuffer = new byte[256];//manuellement le vider dans initialiserrecept
                     //InitialiserReception(tmp);
-                    string Messagecomplet = Encoding.Unicode.GetString(bBuffer);
+                    Messagecomplet = Encoding.Unicode.GetString(bBuffer);
                     Message = Messagecomplet.Split('/');
-
-                    for (int i = 0; i < bBuffer.Length; i++)
+                    this.Invoke(new EventHandler(GestionDonnes));
+                    for (int i = 0; i < bBuffer.Length; i++) //nettoyage
                         bBuffer[i] = 0;
+                    InitialiserReception(tmp);
 
-                    if (Status == true)
-                    {
-                        GestionServeur();
-                    }
-                    else if(Status == false)
-                    {
-                        GestionClient();
-                    }
                 }
                 else
                 {
@@ -152,6 +148,20 @@ namespace JeuxVideo_MemeLegend
                         sServeur.BeginAccept(new AsyncCallback(SurDemandeConnexion), sServeur);
                     sClient = null;
                 }
+            }
+        }
+
+        private void GestionDonnes(object sender, EventArgs e)
+        {
+            
+            //MessageBox.Show(Messagecomplet);
+            if (Status == true)
+            {
+                this.Invoke(new EventHandler(GestionServeur)); 
+            }
+            else if (Status == false)
+            {
+                this.Invoke(new EventHandler(GestionClient));
             }
         }
 
@@ -208,19 +218,19 @@ namespace JeuxVideo_MemeLegend
         }
 
         delegate void RenvoiVersInserer(string sTexte0);
-        private void LancerThreadConnection()
+        /*private void LancerThreadConnection()
         {
             Thread ThreadConnection = new Thread(new ParameterizedThreadStart(GestionConnection));
             ThreadConnection.Start();
         }
-
+        #region test
         private void GestionConnection(object oTexte)
         {
             if (Status == true) //serveur
                 GestionServeur();
             else if (Status == false) //client
                 GestionClient();
-        }
+        }*/
 
         /*private void InsererItem(object oTexte)
         {
@@ -234,7 +244,7 @@ namespace JeuxVideo_MemeLegend
                 lbEchange.Items.Insert(0, (String)oTexte);
             }
         }*/
-        #endregion
+       #endregion
 
         #region processus de debut de partie
 
@@ -242,37 +252,55 @@ namespace JeuxVideo_MemeLegend
         #endregion
 
         #region gestion combat serveur side
-        private void GestionServeur()
+        private void GestionServeur(object sender, EventArgs e)
         {
+            if(Status == true)
+            MessageBox.Show("cote serveur");
+            else
+                MessageBox.Show("cote serveur consider client");
             string reponse;
             switch (Message[0])
             {
                 case "a"://debut comm
                     reponse = CreaToString(joueur1[0]);
                     sClient.Send(Encoding.Unicode.GetBytes("c1/"+reponse));
+                    //sClient.Send(Encoding.Unicode.GetBytes("m/salut"));
                     break;
                 case "m": //message
                     tbTexte.Text = Message[1];
                     break;
                 case "c1": //reception creature
                     joueur2[0] = StringToCrea(Message);
+                    lbJ2.Items.Add(joueur2[0].Nom);
                     creaJ2 = joueur2[1];
                     reponse = CreaToString(joueur1[1]);
                     sClient.Send(Encoding.Unicode.GetBytes("c2/" + reponse));
                     break;
                 case "c2": //reception creature
                     joueur2[1] = StringToCrea(Message);
+                    lbJ2.Items.Add(joueur2[1].Nom);
                     reponse = CreaToString(joueur1[1]);
                     sClient.Send(Encoding.Unicode.GetBytes("c3/" + reponse));
                     break;
                 case "c3": //reception creature  derniere
                     joueur2[2] = StringToCrea(Message);
+                    lbJ2.Items.Add(joueur2[2].Nom);
                     //reponse = CreaToString(joueur1[1]);
-                   // sClient.Send(Encoding.Unicode.GetBytes("c1/" + reponse)); //mettre fin au chargement
+                    // sClient.Send(Encoding.Unicode.GetBytes("c1/" + reponse)); //mettre fin au chargement
                     break;
                 case "b":
                     break;
+                case "hello":
+                    MessageBox.Show("hello identifie cote serveur");
+                    break;
                 default:
+                    MessageBox.Show("Impossible à decode cote serveur");
+                    for(int i = 0;i< Message.Length; i++)
+                    {
+                        MessageBox.Show(Message[i] +" dans message["+i.ToString()+"]");
+                    }
+                    /*foreach(string s in Message)
+                    MessageBox.Show(s + "in m");*/
                     break;
             }
         }
@@ -281,12 +309,17 @@ namespace JeuxVideo_MemeLegend
 
         #region gestion combat client side
 
-        private void GestionClient()
+        private void GestionClient(object sender, EventArgs e)
         {
+            if (Status == false)
+                MessageBox.Show("cote client");
+            else
+                MessageBox.Show("cote client consider serveur");
             string reponse;
             switch (Message[0])
             {
-                case "1":
+                case "a":
+                    sClient.Send(Encoding.Unicode.GetBytes("a/a/a"));
                     break;
                 case "m": //message a afficher
                     tbTexte.Text = Message[1];
@@ -294,20 +327,34 @@ namespace JeuxVideo_MemeLegend
                 case "c1": //reception creature renvoie c1
                     joueur2[0] = StringToCrea(Message);
                     creaJ2 = joueur2[0];
+                    lbJ2.Items.Add(joueur2[0].Nom);
                     reponse = CreaToString(joueur1[0]);
                     sClient.Send(Encoding.Unicode.GetBytes("c1/" + reponse));
                     break;
                 case "c2": //reception creature
                     joueur2[1] = StringToCrea(Message);
+                    lbJ2.Items.Add(joueur2[1].Nom);
                     reponse = CreaToString(joueur1[1]);
                     sClient.Send(Encoding.Unicode.GetBytes("c2/" + reponse));
                     break;
                 case "c3": //reception creature
                     joueur2[2] = StringToCrea(Message);
+                    lbJ2.Items.Add(joueur2[2].Nom);
                     reponse = CreaToString(joueur1[2]);
                     sClient.Send(Encoding.Unicode.GetBytes("c3/" + reponse));
                     break;
+                case "hello":
+                    MessageBox.Show("hello identifie cote client");
+                    break;
                 default:
+                    MessageBox.Show("Impossible à decode cote client");
+                    for (int i = 0; i < Message.Length; i++)
+                    {
+                        MessageBox.Show(Message[i] + " dans message[" + i.ToString() + "]");
+                    }
+                    /*foreach (string s in Message)
+                        MessageBox.Show(s);*/ 
+
                     break;
             }
         }
@@ -352,6 +399,7 @@ namespace JeuxVideo_MemeLegend
             Attaquer(0, creaJ1, creaJ2);
             MajHp();
             CheckVie();*/
+            sClient.Send(Encoding.Unicode.GetBytes("m/salut"));
         }
 
         private void bCap2J1_Click(object sender, EventArgs e)
