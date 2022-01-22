@@ -526,6 +526,7 @@ namespace JeuxVideo_MemeLegend
             this.Controls.Add(this.tbTexte);
             this.Name = "ficCombatOnline";
             this.Text = "ficCombatOnline";
+            this.Load += new System.EventHandler(this.ficCombatOnline_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbJ2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.BoxJ1.ResumeLayout(false);

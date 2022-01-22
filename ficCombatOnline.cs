@@ -24,14 +24,16 @@ namespace JeuxVideo_MemeLegend
         NewCreature[] joueur1 = new NewCreature[3];
         NewCreature[] joueur2 = new NewCreature[3];
         bool tour = true; //true -> j1 false => j2
-        bool Status;
-        private string sFichier;
+        bool Status, debut;
+        private string sFichier = "";
         public ficCombatOnline(NewCreature[] equipeJ1, bool Status, string NomServeur)
         {
             InitializeComponent();
+            debut = false;
             joueur1 = equipeJ1;
             sServeur = null;
             sClient = null;
+            
             this.Status = Status;
             foreach(NewCreature c in joueur1){
                 lbJ1.Items.Add(c.Nom);
@@ -42,6 +44,7 @@ namespace JeuxVideo_MemeLegend
 
             if (Status == true) //serveur
             {
+                debut = true;
                 tour = true;
                 tbTexte.Text = "Vous etes serveur";
                 ConnectionServeur();
@@ -49,11 +52,15 @@ namespace JeuxVideo_MemeLegend
             }
             else //client
             {
+                debut = false;
                 tour = false;
                 tbTexte.Text = "Vous etes client";
                 ConnectionClient(NomServeur);
-
             }
+
+        }
+        private void ficCombatOnline_Load(object sender, EventArgs e)
+        {
 
         }
 
@@ -97,18 +104,17 @@ namespace JeuxVideo_MemeLegend
                 Socket sTmp = (Socket)iAR.AsyncState;
                 sClient = sTmp.EndAccept(iAR);
                 //sClient.Send(Encoding.Unicode.GetBytes("connexion effectué par " + ((IPEndPoint)sClient.RemoteEndPoint).Address.ToString()));
+                sClient.Send(Encoding.Unicode.GetBytes("a"));
                 InitialiserReception(sClient);
             }
         }
 
         private void InitialiserReception(Socket soc)
         {
-            string Messagecomplet = Encoding.Unicode.GetString(bBuffer);
-            Message = Messagecomplet.Split('/');
             
-            for (int i = 0; i < bBuffer.Length; i++)
-                bBuffer[i] = 0;
             soc.BeginReceive(bBuffer, 0, bBuffer.Length, SocketFlags.None, new AsyncCallback(Reception), soc);
+
+
         }
 
         private void Reception(IAsyncResult iAR)
@@ -118,10 +124,25 @@ namespace JeuxVideo_MemeLegend
                 Socket tmp = (Socket)iAR.AsyncState;
                 if (tmp.EndReceive(iAR) > 0)
                 {
+                    //MessageBox.Show(Encoding.Unicode.GetString(bBuffer));
                     //InsererItemThread(Encoding.Unicode.GetString(bBuffer));
                     //lbEchange.Items.Insert(0, Encoding.Unicode.GetString(bBuffer));
                     //bBuffer = new byte[256];//manuellement le vider dans initialiserrecept
-                    InitialiserReception(tmp);
+                    //InitialiserReception(tmp);
+                    string Messagecomplet = Encoding.Unicode.GetString(bBuffer);
+                    Message = Messagecomplet.Split('/');
+
+                    for (int i = 0; i < bBuffer.Length; i++)
+                        bBuffer[i] = 0;
+
+                    if (Status == true)
+                    {
+                        GestionServeur();
+                    }
+                    else if(Status == false)
+                    {
+                        GestionClient();
+                    }
                 }
                 else
                 {
@@ -223,9 +244,33 @@ namespace JeuxVideo_MemeLegend
         #region gestion combat serveur side
         private void GestionServeur()
         {
+            string reponse;
             switch (Message[0])
             {
-                case "1":
+                case "a"://debut comm
+                    reponse = CreaToString(joueur1[0]);
+                    sClient.Send(Encoding.Unicode.GetBytes("c1/"+reponse));
+                    break;
+                case "m": //message
+                    tbTexte.Text = Message[1];
+                    break;
+                case "c1": //reception creature
+                    joueur2[0] = StringToCrea(Message);
+                    creaJ2 = joueur2[1];
+                    reponse = CreaToString(joueur1[1]);
+                    sClient.Send(Encoding.Unicode.GetBytes("c2/" + reponse));
+                    break;
+                case "c2": //reception creature
+                    joueur2[1] = StringToCrea(Message);
+                    reponse = CreaToString(joueur1[1]);
+                    sClient.Send(Encoding.Unicode.GetBytes("c3/" + reponse));
+                    break;
+                case "c3": //reception creature  derniere
+                    joueur2[2] = StringToCrea(Message);
+                    //reponse = CreaToString(joueur1[1]);
+                   // sClient.Send(Encoding.Unicode.GetBytes("c1/" + reponse)); //mettre fin au chargement
+                    break;
+                case "b":
                     break;
                 default:
                     break;
@@ -238,9 +283,29 @@ namespace JeuxVideo_MemeLegend
 
         private void GestionClient()
         {
+            string reponse;
             switch (Message[0])
             {
                 case "1":
+                    break;
+                case "m": //message a afficher
+                    tbTexte.Text = Message[1];
+                    break;
+                case "c1": //reception creature renvoie c1
+                    joueur2[0] = StringToCrea(Message);
+                    creaJ2 = joueur2[0];
+                    reponse = CreaToString(joueur1[0]);
+                    sClient.Send(Encoding.Unicode.GetBytes("c1/" + reponse));
+                    break;
+                case "c2": //reception creature
+                    joueur2[1] = StringToCrea(Message);
+                    reponse = CreaToString(joueur1[1]);
+                    sClient.Send(Encoding.Unicode.GetBytes("c2/" + reponse));
+                    break;
+                case "c3": //reception creature
+                    joueur2[2] = StringToCrea(Message);
+                    reponse = CreaToString(joueur1[2]);
+                    sClient.Send(Encoding.Unicode.GetBytes("c3/" + reponse));
                     break;
                 default:
                     break;
@@ -332,6 +397,49 @@ namespace JeuxVideo_MemeLegend
         #endregion
 
         #region gestion arriere
+
+        private string CreaToString(NewCreature crea)
+        {
+            string message;
+            message = crea.Nom + "/" +
+                crea.Type + "/" +
+                crea.HP.ToString() + "/" +
+                crea.HPMax.ToString() + "/" +
+                crea.Attaque.ToString() + "/" +
+                crea.AttaqueSpec.ToString() + "/" +
+                crea.Defense.ToString() + "/" +
+                crea.DefenseSpec.ToString() + "/";
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (i < 3)
+                    message += crea.capacite[i] + "/";
+                else
+                    message += crea.capacite[i];
+            }
+            return message;
+        }
+
+        private NewCreature StringToCrea(string[] text)
+        {
+            string[] idcap = new string[4]
+            {
+                 text[9] ,
+                 text[10] ,
+                 text[11] ,
+                 text[12] 
+            };
+            NewCreature crea = new NewCreature(text[1], //nom
+                                                text[2],//type
+                                                Int32.Parse(text[3]),//hp
+                                                Int32.Parse(text[4]),//hpmax
+                                                Int32.Parse(text[5]),//att
+                                                Int32.Parse(text[6]),//attspec
+                                                Int32.Parse(text[7]),//def
+                                                Int32.Parse(text[8]),//defspec
+                                                idcap) ;//technique
+            return crea;
+        }
 
         private void ChangeImage(PictureBox photo, NewCreature creature)
         {

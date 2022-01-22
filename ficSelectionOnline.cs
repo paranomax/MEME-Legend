@@ -23,6 +23,7 @@ namespace JeuxVideo_MemeLegend
         private void ficSelectionOnline_Load(object sender, EventArgs e)
         {
             tbServeur.Text = System.Environment.MachineName;
+            pbKermit_Click(null, null);
         }
 
         private void pbKermit_Click(object sender, EventArgs e)
@@ -112,11 +113,17 @@ namespace JeuxVideo_MemeLegend
         {
             if(cbServeur.SelectedItem.ToString() == "Serveur")
             {
+                Hide();
                 ficCombatOnline f = new ficCombatOnline(Joueur, true, tbServeur.Text);
+                f.ShowDialog();
+                Show();
             }
             else
             {
+                Hide();
                 ficCombatOnline f = new ficCombatOnline(Joueur, false, tbServeur.Text);
+                f.ShowDialog();
+                Show();
             }
             
         }
