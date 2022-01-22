@@ -29,8 +29,6 @@ namespace JeuxVideo_MemeLegend
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbJ2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sfdEnregistrer = new System.Windows.Forms.SaveFileDialog();
             this.bSauvegarder = new System.Windows.Forms.Button();
             this.bQuitter = new System.Windows.Forms.Button();
@@ -42,11 +40,6 @@ namespace JeuxVideo_MemeLegend
             this.lbJ1 = new System.Windows.Forms.ListBox();
             this.BoxJ1 = new System.Windows.Forms.GroupBox();
             this.lTitre = new System.Windows.Forms.Label();
-            this.lJ2 = new System.Windows.Forms.Label();
-            this.LifeJ2 = new System.Windows.Forms.ProgressBar();
-            this.lJ1 = new System.Windows.Forms.Label();
-            this.LifeJ1 = new System.Windows.Forms.ProgressBar();
-            this.pbJ1 = new System.Windows.Forms.PictureBox();
             this.tbTexte = new System.Windows.Forms.TextBox();
             this.gbInfo = new System.Windows.Forms.GroupBox();
             this.lCapacite4 = new System.Windows.Forms.Label();
@@ -71,31 +64,19 @@ namespace JeuxVideo_MemeLegend
             this.lNom = new System.Windows.Forms.Label();
             this.lbJ2 = new System.Windows.Forms.ListBox();
             this.lJoueur2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pbJ2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.lJ2 = new System.Windows.Forms.Label();
+            this.LifeJ2 = new System.Windows.Forms.ProgressBar();
+            this.lJ1 = new System.Windows.Forms.Label();
+            this.LifeJ1 = new System.Windows.Forms.ProgressBar();
+            this.pbJ2 = new System.Windows.Forms.PictureBox();
+            this.pbJ1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BoxJ1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbJ1)).BeginInit();
             this.gbInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbJ2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbJ1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbJ2
-            // 
-            this.pbJ2.Location = new System.Drawing.Point(825, 103);
-            this.pbJ2.Name = "pbJ2";
-            this.pbJ2.Size = new System.Drawing.Size(200, 200);
-            this.pbJ2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbJ2.TabIndex = 15;
-            this.pbJ2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::JeuxVideo_MemeLegend.Properties.Resources.BackgroundBattle;
-            this.pictureBox1.Location = new System.Drawing.Point(256, 50);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(899, 434);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
             // 
             // sfdEnregistrer
             // 
@@ -211,51 +192,6 @@ namespace JeuxVideo_MemeLegend
             this.lTitre.Size = new System.Drawing.Size(115, 35);
             this.lTitre.TabIndex = 21;
             this.lTitre.Text = "Combat ! ";
-            // 
-            // lJ2
-            // 
-            this.lJ2.AutoSize = true;
-            this.lJ2.BackColor = System.Drawing.Color.White;
-            this.lJ2.Font = new System.Drawing.Font("Minecraftia", 10.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lJ2.Location = new System.Drawing.Point(552, 91);
-            this.lJ2.Name = "lJ2";
-            this.lJ2.Size = new System.Drawing.Size(43, 33);
-            this.lJ2.TabIndex = 20;
-            this.lJ2.Text = "J2";
-            // 
-            // LifeJ2
-            // 
-            this.LifeJ2.Location = new System.Drawing.Point(549, 127);
-            this.LifeJ2.Name = "LifeJ2";
-            this.LifeJ2.Size = new System.Drawing.Size(270, 26);
-            this.LifeJ2.TabIndex = 19;
-            // 
-            // lJ1
-            // 
-            this.lJ1.AutoSize = true;
-            this.lJ1.BackColor = System.Drawing.Color.White;
-            this.lJ1.Font = new System.Drawing.Font("Minecraftia", 10.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lJ1.Location = new System.Drawing.Point(653, 374);
-            this.lJ1.Name = "lJ1";
-            this.lJ1.Size = new System.Drawing.Size(43, 33);
-            this.lJ1.TabIndex = 18;
-            this.lJ1.Text = "J1";
-            // 
-            // LifeJ1
-            // 
-            this.LifeJ1.Location = new System.Drawing.Point(659, 410);
-            this.LifeJ1.Name = "LifeJ1";
-            this.LifeJ1.Size = new System.Drawing.Size(270, 26);
-            this.LifeJ1.TabIndex = 17;
-            // 
-            // pbJ1
-            // 
-            this.pbJ1.Location = new System.Drawing.Point(384, 236);
-            this.pbJ1.Name = "pbJ1";
-            this.pbJ1.Size = new System.Drawing.Size(200, 200);
-            this.pbJ1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbJ1.TabIndex = 14;
-            this.pbJ1.TabStop = false;
             // 
             // tbTexte
             // 
@@ -503,45 +439,106 @@ namespace JeuxVideo_MemeLegend
             this.lJoueur2.TabIndex = 20;
             this.lJoueur2.Text = "Joueur2";
             // 
+            // lJ2
+            // 
+            this.lJ2.AutoSize = true;
+            this.lJ2.BackColor = System.Drawing.Color.White;
+            this.lJ2.Font = new System.Drawing.Font("Minecraftia", 10.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lJ2.Location = new System.Drawing.Point(540, 91);
+            this.lJ2.Name = "lJ2";
+            this.lJ2.Size = new System.Drawing.Size(43, 33);
+            this.lJ2.TabIndex = 33;
+            this.lJ2.Text = "J2";
+            // 
+            // LifeJ2
+            // 
+            this.LifeJ2.Location = new System.Drawing.Point(537, 127);
+            this.LifeJ2.Name = "LifeJ2";
+            this.LifeJ2.Size = new System.Drawing.Size(270, 26);
+            this.LifeJ2.TabIndex = 32;
+            // 
+            // lJ1
+            // 
+            this.lJ1.AutoSize = true;
+            this.lJ1.BackColor = System.Drawing.Color.White;
+            this.lJ1.Font = new System.Drawing.Font("Minecraftia", 10.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lJ1.Location = new System.Drawing.Point(653, 374);
+            this.lJ1.Name = "lJ1";
+            this.lJ1.Size = new System.Drawing.Size(43, 33);
+            this.lJ1.TabIndex = 31;
+            this.lJ1.Text = "J1";
+            // 
+            // LifeJ1
+            // 
+            this.LifeJ1.Location = new System.Drawing.Point(659, 410);
+            this.LifeJ1.Name = "LifeJ1";
+            this.LifeJ1.Size = new System.Drawing.Size(270, 26);
+            this.LifeJ1.TabIndex = 30;
+            // 
+            // pbJ2
+            // 
+            this.pbJ2.Location = new System.Drawing.Point(825, 103);
+            this.pbJ2.Name = "pbJ2";
+            this.pbJ2.Size = new System.Drawing.Size(200, 200);
+            this.pbJ2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbJ2.TabIndex = 29;
+            this.pbJ2.TabStop = false;
+            // 
+            // pbJ1
+            // 
+            this.pbJ1.Location = new System.Drawing.Point(384, 236);
+            this.pbJ1.Name = "pbJ1";
+            this.pbJ1.Size = new System.Drawing.Size(200, 200);
+            this.pbJ1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbJ1.TabIndex = 28;
+            this.pbJ1.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::JeuxVideo_MemeLegend.Properties.Resources.BackgroundBattle;
+            this.pictureBox1.Location = new System.Drawing.Point(256, 50);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(899, 434);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 27;
+            this.pictureBox1.TabStop = false;
+            // 
             // ficCombatOnline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGreen;
             this.ClientSize = new System.Drawing.Size(1410, 733);
-            this.Controls.Add(this.lJoueur2);
-            this.Controls.Add(this.lbJ2);
-            this.Controls.Add(this.gbInfo);
-            this.Controls.Add(this.pbJ2);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.bSauvegarder);
-            this.Controls.Add(this.bQuitter);
-            this.Controls.Add(this.BoxJ1);
-            this.Controls.Add(this.lTitre);
             this.Controls.Add(this.lJ2);
             this.Controls.Add(this.LifeJ2);
             this.Controls.Add(this.lJ1);
             this.Controls.Add(this.LifeJ1);
+            this.Controls.Add(this.pbJ2);
             this.Controls.Add(this.pbJ1);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lJoueur2);
+            this.Controls.Add(this.lbJ2);
+            this.Controls.Add(this.gbInfo);
+            this.Controls.Add(this.bSauvegarder);
+            this.Controls.Add(this.bQuitter);
+            this.Controls.Add(this.BoxJ1);
+            this.Controls.Add(this.lTitre);
             this.Controls.Add(this.tbTexte);
             this.Name = "ficCombatOnline";
             this.Text = "ficCombatOnline";
             this.Load += new System.EventHandler(this.ficCombatOnline_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pbJ2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.BoxJ1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbJ1)).EndInit();
             this.gbInfo.ResumeLayout(false);
             this.gbInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbJ2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbJ1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pbJ2;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.SaveFileDialog sfdEnregistrer;
         private System.Windows.Forms.Button bSauvegarder;
         private System.Windows.Forms.Button bQuitter;
@@ -553,11 +550,6 @@ namespace JeuxVideo_MemeLegend
         private System.Windows.Forms.ListBox lbJ1;
         private System.Windows.Forms.GroupBox BoxJ1;
         private System.Windows.Forms.Label lTitre;
-        private System.Windows.Forms.Label lJ2;
-        private System.Windows.Forms.ProgressBar LifeJ2;
-        private System.Windows.Forms.Label lJ1;
-        private System.Windows.Forms.ProgressBar LifeJ1;
-        private System.Windows.Forms.PictureBox pbJ1;
         private System.Windows.Forms.TextBox tbTexte;
         private System.Windows.Forms.GroupBox gbInfo;
         private System.Windows.Forms.Label lCapacite4;
@@ -582,5 +574,12 @@ namespace JeuxVideo_MemeLegend
         private System.Windows.Forms.Label lNom;
         private System.Windows.Forms.ListBox lbJ2;
         private System.Windows.Forms.Label lJoueur2;
+        private System.Windows.Forms.Label lJ2;
+        private System.Windows.Forms.ProgressBar LifeJ2;
+        private System.Windows.Forms.Label lJ1;
+        private System.Windows.Forms.ProgressBar LifeJ1;
+        private System.Windows.Forms.PictureBox pbJ2;
+        private System.Windows.Forms.PictureBox pbJ1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

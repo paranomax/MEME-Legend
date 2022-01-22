@@ -47,7 +47,7 @@ namespace JeuxVideo_MemeLegend
             {
                 debut = true;
                 tour = true;
-                tbTexte.Text = "Vous etes serveur";
+                tbTexte.Text = "En Attente d'un Joueur";
                 ConnectionServeur();
                 
             }
@@ -55,7 +55,7 @@ namespace JeuxVideo_MemeLegend
             {
                 debut = false;
                 tour = false;
-                tbTexte.Text = "Vous etes client";
+                tbTexte.Text = "Recherche de joueur";
                 ConnectionClient(NomServeur);
             }
 
@@ -104,7 +104,7 @@ namespace JeuxVideo_MemeLegend
             {
                 Socket sTmp = (Socket)iAR.AsyncState;
                 sClient = sTmp.EndAccept(iAR);
-                sClient.Send(Encoding.Unicode.GetBytes("a/a/a"));
+                sClient.Send(Encoding.Unicode.GetBytes("a/"));
                 //sClient.Send(Encoding.Unicode.GetBytes("a/"));
                 InitialiserReception(sClient);
             }
@@ -254,15 +254,16 @@ namespace JeuxVideo_MemeLegend
         #region gestion combat serveur side
         private void GestionServeur(object sender, EventArgs e)
         {
-            if(Status == true)
+            /*if(Status == true)
             MessageBox.Show("cote serveur");
             else
-                MessageBox.Show("cote serveur consider client");
+                MessageBox.Show("cote serveur consider client");*/
             string reponse;
             switch (Message[0])
             {
                 case "a"://debut comm
                     reponse = CreaToString(joueur1[0]);
+                    tbTexte.Text = "chargement";
                     sClient.Send(Encoding.Unicode.GetBytes("c1/"+reponse));
                     //sClient.Send(Encoding.Unicode.GetBytes("m/salut"));
                     break;
@@ -272,21 +273,22 @@ namespace JeuxVideo_MemeLegend
                 case "c1": //reception creature
                     joueur2[0] = StringToCrea(Message);
                     lbJ2.Items.Add(joueur2[0].Nom);
-                    creaJ2 = joueur2[1];
+                    creaJ2 = joueur2[0];
                     reponse = CreaToString(joueur1[1]);
                     sClient.Send(Encoding.Unicode.GetBytes("c2/" + reponse));
                     break;
                 case "c2": //reception creature
                     joueur2[1] = StringToCrea(Message);
                     lbJ2.Items.Add(joueur2[1].Nom);
-                    reponse = CreaToString(joueur1[1]);
+                    reponse = CreaToString(joueur1[2]);
                     sClient.Send(Encoding.Unicode.GetBytes("c3/" + reponse));
                     break;
                 case "c3": //reception creature  derniere
                     joueur2[2] = StringToCrea(Message);
                     lbJ2.Items.Add(joueur2[2].Nom);
-                    //reponse = CreaToString(joueur1[1]);
-                    // sClient.Send(Encoding.Unicode.GetBytes("c1/" + reponse)); //mettre fin au chargement
+                    //reponse = CreaToString(joueur1[1]); //mettre fin au chargement
+                    MajComplete();
+                    changetour();
                     break;
                 case "b":
                     break;
@@ -311,15 +313,16 @@ namespace JeuxVideo_MemeLegend
 
         private void GestionClient(object sender, EventArgs e)
         {
-            if (Status == false)
+           /* if (Status == false)
                 MessageBox.Show("cote client");
             else
-                MessageBox.Show("cote client consider serveur");
+                MessageBox.Show("cote client consider serveur");*/
             string reponse;
             switch (Message[0])
             {
                 case "a":
-                    sClient.Send(Encoding.Unicode.GetBytes("a/a/a"));
+                    tbTexte.Text = "chargement";
+                    sClient.Send(Encoding.Unicode.GetBytes("a/"));
                     break;
                 case "m": //message a afficher
                     tbTexte.Text = Message[1];
@@ -342,6 +345,10 @@ namespace JeuxVideo_MemeLegend
                     lbJ2.Items.Add(joueur2[2].Nom);
                     reponse = CreaToString(joueur1[2]);
                     sClient.Send(Encoding.Unicode.GetBytes("c3/" + reponse));
+                    MajComplete();
+                    break;
+                case "tour":
+                    changetour();
                     break;
                 case "hello":
                     MessageBox.Show("hello identifie cote client");
@@ -365,6 +372,15 @@ namespace JeuxVideo_MemeLegend
         #region gestion bouton
         private void bChanger1_Click(object sender, EventArgs e)
         {
+            if (Status)
+            {
+                //applique de son cote et envoie l info
+            }
+            else
+            {
+                //envoie ordre, gere une fonction de l autre cote
+                //faire une fonction qui dit si ok
+            }
             if (lbJ1.SelectedIndex >= 0)
             {
                 if (creaJ1 == joueur1[lbJ1.SelectedIndex])
@@ -378,7 +394,9 @@ namespace JeuxVideo_MemeLegend
                 else
                 {
                     creaJ1 = joueur1[lbJ1.SelectedIndex];
-                    tbTexte.Text = creaJ1.Nom + " !! en Avant !!";
+                    if(Status)
+                        tbTexte.Text = creaJ1.Nom + " !! en Avant !!";
+                    sClient.Send(Encoding.Unicode.GetBytes("m/"+tbTexte.Text+"/"));
                     tbTexte.Refresh();
                     Application.DoEvents();
                     Thread.Sleep(1500);
@@ -395,11 +413,15 @@ namespace JeuxVideo_MemeLegend
         }
         private void bCap1J1_Click(object sender, EventArgs e)
         {
-            /*pause();
-            Attaquer(0, creaJ1, creaJ2);
-            MajHp();
-            CheckVie();*/
-            sClient.Send(Encoding.Unicode.GetBytes("m/salut"));
+            if(Status)
+            {
+                MessageBox.Show("attaque 1");
+            }
+            else
+            {
+                MessageBox.Show("attaque 1");
+            }
+                
         }
 
         private void bCap2J1_Click(object sender, EventArgs e)
@@ -417,6 +439,11 @@ namespace JeuxVideo_MemeLegend
 
         }
 
+        private void attaque(int att)
+        {
+
+        }
+
         private void lbJ1_SelectedIndexChanged(object sender, EventArgs e)
         {
             majCreature(joueur1[lbJ1.SelectedIndex]);
@@ -424,7 +451,7 @@ namespace JeuxVideo_MemeLegend
 
         private void lbJ2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            majCreature(joueur1[lbJ2.SelectedIndex]);
+            majCreature(joueur2[lbJ2.SelectedIndex]);
         }
 
         public void majCreature( NewCreature crea)
@@ -460,10 +487,7 @@ namespace JeuxVideo_MemeLegend
 
             for (int i = 0; i < 4; i++)
             {
-                if (i < 3)
                     message += crea.capacite[i] + "/";
-                else
-                    message += crea.capacite[i];
             }
             return message;
         }
@@ -491,53 +515,64 @@ namespace JeuxVideo_MemeLegend
 
         private void ChangeImage(PictureBox photo, NewCreature creature)
         {
-            switch (creature.Nom)
+            try
             {
-                case "Kermit":
-                    photo.Image = Properties.Resources.Kermitph;
-                    break;
-                case "Donald Duck":
-                    photo.Image = Properties.Resources.donaldduckph;
-                    break;
-                case "Doggo":
-                    photo.Image = Properties.Resources.doggoph;
-                    break;
-                case "Elon Musk":
-                    photo.Image = Properties.Resources.Elonmuskph;
-                    break;
-                case "Snoop Dogg":
-                    photo.Image = Properties.Resources.snoopdoggph;
-                    break;
-                case "Elmo":
-                    photo.Image = Properties.Resources.Elmoph;
-                    break;
-                case "Ricardo":
-                    photo.Image = Properties.Resources.Ricardoph;
-                    break;
-                case "Pepe":
-                    photo.Image = Properties.Resources.pepethefrogph;
-                    break;
-                case "Waluigi":
-                    photo.Image = Properties.Resources.Waluigiph;
-                    break;
-                default:
-                    break;
+                switch (creature.Nom)
+                {
+                    case "Kermit":
+                        photo.Image = Properties.Resources.Kermitph;
+                        break;
+                    case "Donald Duck":
+                        photo.Image = Properties.Resources.donaldduckph;
+                        break;
+                    case "Doggo":
+                        photo.Image = Properties.Resources.doggoph;
+                        break;
+                    case "Elon Musk":
+                        photo.Image = Properties.Resources.Elonmuskph;
+                        break;
+                    case "Snoop Dogg":
+                        photo.Image = Properties.Resources.snoopdoggph;
+                        break;
+                    case "Elmo":
+                        photo.Image = Properties.Resources.Elmoph;
+                        break;
+                    case "Ricardo":
+                        photo.Image = Properties.Resources.Ricardoph;
+                        break;
+                    case "Pepe":
+                        photo.Image = Properties.Resources.pepethefrogph;
+                        break;
+                    case "Waluigi":
+                        photo.Image = Properties.Resources.Waluigiph;
+                        break;
+                    default:
+                        break;
+                }
             }
+            catch 
+            {
+                tbTexte.Text = "erreur de chargement d image";
+            }
+            
         }
-        void changetour()
+        private void changetour()
         {
             if (tour == true)
             {
-                BoxJ1.Enabled = false;
-                tbTexte.Text = "au tour du J2";
+                BoxJ1.Enabled = true;
+                tbTexte.Text = "au tour du serveur";
                 tour = false;
+                
             }
             else
             {
-                BoxJ1.Enabled = true;
-                tbTexte.Text = "au tour du J1";
+                BoxJ1.Enabled = false;
+                tbTexte.Text = "au tour du client";
                 tour = true;
             }
+            if (Status)
+                sClient.Send(Encoding.Unicode.GetBytes("tour/"));
             tbTexte.Refresh();
             Application.DoEvents();
         }
@@ -641,6 +676,16 @@ namespace JeuxVideo_MemeLegend
                 changetour();
         }
 
+        private void MajComplete()
+        {
+            ChangeImage(pbJ1, creaJ1);
+            ChangeImage(pbJ2, creaJ2);
+            bCap1J1.Text = creaJ1.techniques[0].Nom;
+            bCap2J1.Text = creaJ1.techniques[1].Nom;
+            bCap3J1.Text = creaJ1.techniques[2].Nom;
+            bCap4J1.Text = creaJ1.techniques[3].Nom;
+            MajHp();
+        }
         
 
         private int ScanCreature(bool Joueur)

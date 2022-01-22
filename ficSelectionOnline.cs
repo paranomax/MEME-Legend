@@ -24,6 +24,7 @@ namespace JeuxVideo_MemeLegend
         {
             tbServeur.Text = System.Environment.MachineName;
             pbKermit_Click(null, null);
+            cbServeur.SelectedIndex = 0;
         }
 
         private void pbKermit_Click(object sender, EventArgs e)
