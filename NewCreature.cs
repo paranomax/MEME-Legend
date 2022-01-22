@@ -14,42 +14,42 @@ namespace JeuxVideo_MemeLegend
     {
         public String Nom, Type;
         public int i;
-        public Capacite[] techniques = new Capacite[4];
+        public NewCapacite[] techniques = new NewCapacite[4];
         public string[] capacite = new string[4];
-        public static Dictionary<string, Capacite> ListCapacite = new Dictionary<string, Capacite>()
+        public static Dictionary<string, NewCapacite> ListCapacite = new Dictionary<string, NewCapacite>()
         {
-            {"trempette", new Capacite("trempette", "Neutre", 0, 1, false, 1) },
-            {"comeback", new Capacite("Come back des muppets", "Normal", 70, 0, false, 2) },
-            {"Showbiz", new Capacite("Showbiz", "Neutre", 0, 2, false, 3) },
-            {"Lancethe", new Capacite("Lance-Thé", "Eau", 65, 0, true, 4) },
-            {"RageOn", new Capacite("Rage-On", "Psy", 0, 3, true, 5) },
-            {"SmugFace", new Capacite("Smug Face", "Neutre", 0, 4, true, 6) },
-            {"CyberHarcel", new Capacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },
-            {"Invest", new Capacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },
-            {"LanceFlam", new Capacite("Lance-Flamme", "Feu", 65, 0, true, 9) },
-            {"MeteorTesla", new Capacite("Météor Tesla", "Milliardaire", 80, 6, true, 10) },
-            {"ClaqueLias", new Capacite("Claque de Liasse", "Milliardaire", 60, 0, false, 11) },
-            {"Weed",new Capacite("Weed?", "Poison", 75, 7, true, 12) },
-            {"NuageTox", new Capacite("Nuage Toxique", "Poison", 65, 0, true, 13) },
-            {"Feat", new Capacite("Feat", "Neutre", 0, 8, false, 14) },
-            {"TuAime", new Capacite("Tu aime ça ?", "Normal", 30, 9, true, 15) },
-            {"puissance", new Capacite("Puissance", "Combat", 0, 10, false, 16) },
-            {"CloseCombat", new Capacite("Close Combat", "Combat", 80, 11, false, 17) },
-            {"Seduction",new Capacite("Séduction", "Neutre", 0, 12, true, 18) },
-            {"SilenceWench", new Capacite("Silence Wench", "Normal", 70, 0, false, 19) },
-            {"Angery", new Capacite("Angery", "Neutre", 0, 13, false, 20) },
-            {"ShibeIs", new Capacite("Shibe Is King", "Neutre", 0, 14, false, 21) },
-            {"CopyClaim", new Capacite("CopyClaim", "Copyright", 60, 15, true, 22) },
-            {"noPants", new Capacite("No Pants", "Neutre", 0, 13, false, 23) },
-            {"ClaqueBec", new Capacite("Claque Bec", "Normal", 65, 0, false, 24) },
-            {"WorldOnFire", new Capacite("World On Fire", "Feu", 30, 16, true, 25)},
-            {"SacrificeForL", new Capacite("Sacrifice For The Lords", "Feu", 80, 0, true, 26)},
-            {"PurificationInFire", new Capacite("Purification In Fire", "Neutre", 0, 17, false, 27) },
-            {"Waahaha", new Capacite("Waahaha", "Inconnue", 10, 14, true, 28) },
-            {"Heyeahyeah", new Capacite("Heyeahyeahyeah", "Inconnu", 40, 19, false, 30) },
-            {"WaluigiTime", new Capacite("Waluigi Time !", "Inconnu", 20, 18, true, 29) },
-            {"Smash", new Capacite("Smash", "Inconnu", 70, 0, false, 31)},
-            {"NeRienFaire", new Capacite("ne rien faire", "Normal", 0, 0, false, 0) }
+            {"trempette", new NewCapacite("trempette", "Neutre", 0, 1, false, 1) },
+            {"comeback", new NewCapacite("Come back des muppets", "Normal", 70, 0, false, 2) },
+            {"Showbiz", new NewCapacite("Showbiz", "Neutre", 0, 2, false, 3) },
+            {"Lancethe", new NewCapacite("Lance-Thé", "Eau", 65, 0, true, 4) },
+            {"RageOn", new NewCapacite("Rage-On", "Psy", 0, 3, true, 5) },
+            {"SmugFace", new NewCapacite("Smug Face", "Neutre", 0, 4, true, 6) },
+            {"CyberHarcel", new NewCapacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },
+            {"Invest", new NewCapacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },
+            {"LanceFlam", new NewCapacite("Lance-Flamme", "Feu", 65, 0, true, 9) },
+            {"MeteorTesla", new NewCapacite("Météor Tesla", "Milliardaire", 80, 6, true, 10) },
+            {"ClaqueLias", new NewCapacite("Claque de Liasse", "Milliardaire", 60, 0, false, 11) },
+            {"Weed",new NewCapacite("Weed?", "Poison", 75, 7, true, 12) },
+            {"NuageTox", new NewCapacite("Nuage Toxique", "Poison", 65, 0, true, 13) },
+            {"Feat", new NewCapacite("Feat", "Neutre", 0, 8, false, 14) },
+            {"TuAime", new NewCapacite("Tu aime ça ?", "Normal", 30, 9, true, 15) },
+            {"puissance", new NewCapacite("Puissance", "Combat", 0, 10, false, 16) },
+            {"CloseCombat", new NewCapacite("Close Combat", "Combat", 80, 11, false, 17) },
+            {"Seduction",new NewCapacite("Séduction", "Neutre", 0, 12, true, 18) },
+            {"SilenceWench", new NewCapacite("Silence Wench", "Normal", 70, 0, false, 19) },
+            {"Angery", new NewCapacite("Angery", "Neutre", 0, 13, false, 20) },
+            {"ShibeIs", new NewCapacite("Shibe Is King", "Neutre", 0, 14, false, 21) },
+            {"CopyClaim", new NewCapacite("CopyClaim", "Copyright", 60, 15, true, 22) },
+            {"noPants", new NewCapacite("No Pants", "Neutre", 0, 13, false, 23) },
+            {"ClaqueBec", new NewCapacite("Claque Bec", "Normal", 65, 0, false, 24) },
+            {"WorldOnFire", new NewCapacite("World On Fire", "Feu", 30, 16, true, 25)},
+            {"SacrificeForL", new NewCapacite("Sacrifice For The Lords", "Feu", 80, 0, true, 26)},
+            {"PurificationInFire", new NewCapacite("Purification In Fire", "Neutre", 0, 17, false, 27) },
+            {"Waahaha", new NewCapacite("Waahaha", "Inconnue", 10, 14, true, 28) },
+            {"Heyeahyeah", new NewCapacite("Heyeahyeahyeah", "Inconnu", 40, 19, false, 30) },
+            {"WaluigiTime", new NewCapacite("Waluigi Time !", "Inconnu", 20, 18, true, 29) },
+            {"Smash", new NewCapacite("Smash", "Inconnu", 70, 0, false, 31)},
+            {"NeRienFaire", new NewCapacite("ne rien faire", "Normal", 0, 0, false, 0) }
         };
 
 

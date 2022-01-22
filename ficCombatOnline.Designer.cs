@@ -34,7 +34,6 @@ namespace JeuxVideo_MemeLegend
             this.sfdEnregistrer = new System.Windows.Forms.SaveFileDialog();
             this.bSauvegarder = new System.Windows.Forms.Button();
             this.bQuitter = new System.Windows.Forms.Button();
-            this.bInformation1 = new System.Windows.Forms.Button();
             this.bChanger1 = new System.Windows.Forms.Button();
             this.bCap3J1 = new System.Windows.Forms.Button();
             this.bCap4J1 = new System.Windows.Forms.Button();
@@ -120,25 +119,16 @@ namespace JeuxVideo_MemeLegend
             this.bQuitter.Text = "Quitter";
             this.bQuitter.UseVisualStyleBackColor = true;
             // 
-            // bInformation1
-            // 
-            this.bInformation1.Font = new System.Drawing.Font("Minecraftia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bInformation1.Location = new System.Drawing.Point(17, 127);
-            this.bInformation1.Name = "bInformation1";
-            this.bInformation1.Size = new System.Drawing.Size(189, 53);
-            this.bInformation1.TabIndex = 6;
-            this.bInformation1.Text = "check information";
-            this.bInformation1.UseVisualStyleBackColor = true;
-            // 
             // bChanger1
             // 
             this.bChanger1.Font = new System.Drawing.Font("Minecraftia", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bChanger1.Location = new System.Drawing.Point(17, 186);
+            this.bChanger1.Location = new System.Drawing.Point(17, 118);
             this.bChanger1.Name = "bChanger1";
             this.bChanger1.Size = new System.Drawing.Size(189, 53);
             this.bChanger1.TabIndex = 5;
             this.bChanger1.Text = "Changer de meme";
             this.bChanger1.UseVisualStyleBackColor = true;
+            this.bChanger1.Click += new System.EventHandler(this.bChanger1_Click);
             // 
             // bCap3J1
             // 
@@ -149,6 +139,7 @@ namespace JeuxVideo_MemeLegend
             this.bCap3J1.TabIndex = 4;
             this.bCap3J1.Text = "button3";
             this.bCap3J1.UseVisualStyleBackColor = true;
+            this.bCap3J1.Click += new System.EventHandler(this.bCap3J1_Click);
             // 
             // bCap4J1
             // 
@@ -159,6 +150,7 @@ namespace JeuxVideo_MemeLegend
             this.bCap4J1.TabIndex = 3;
             this.bCap4J1.Text = "button4";
             this.bCap4J1.UseVisualStyleBackColor = true;
+            this.bCap4J1.Click += new System.EventHandler(this.bCap4J1_Click);
             // 
             // bCap2J1
             // 
@@ -169,6 +161,7 @@ namespace JeuxVideo_MemeLegend
             this.bCap2J1.TabIndex = 2;
             this.bCap2J1.Text = "button2";
             this.bCap2J1.UseVisualStyleBackColor = true;
+            this.bCap2J1.Click += new System.EventHandler(this.bCap2J1_Click);
             // 
             // bCap1J1
             // 
@@ -179,6 +172,7 @@ namespace JeuxVideo_MemeLegend
             this.bCap1J1.TabIndex = 1;
             this.bCap1J1.Text = "button1";
             this.bCap1J1.UseVisualStyleBackColor = true;
+            this.bCap1J1.Click += new System.EventHandler(this.bCap1J1_Click);
             // 
             // lbJ1
             // 
@@ -190,10 +184,10 @@ namespace JeuxVideo_MemeLegend
             this.lbJ1.Name = "lbJ1";
             this.lbJ1.Size = new System.Drawing.Size(189, 73);
             this.lbJ1.TabIndex = 0;
+            this.lbJ1.SelectedIndexChanged += new System.EventHandler(this.lbJ1_SelectedIndexChanged);
             // 
             // BoxJ1
             // 
-            this.BoxJ1.Controls.Add(this.bInformation1);
             this.BoxJ1.Controls.Add(this.bChanger1);
             this.BoxJ1.Controls.Add(this.bCap3J1);
             this.BoxJ1.Controls.Add(this.bCap4J1);
@@ -498,6 +492,7 @@ namespace JeuxVideo_MemeLegend
             this.lbJ2.Name = "lbJ2";
             this.lbJ2.Size = new System.Drawing.Size(189, 73);
             this.lbJ2.TabIndex = 7;
+            this.lbJ2.SelectedIndexChanged += new System.EventHandler(this.lbJ2_SelectedIndexChanged);
             // 
             // lJoueur2
             // 
@@ -549,7 +544,6 @@ namespace JeuxVideo_MemeLegend
         private System.Windows.Forms.SaveFileDialog sfdEnregistrer;
         private System.Windows.Forms.Button bSauvegarder;
         private System.Windows.Forms.Button bQuitter;
-        private System.Windows.Forms.Button bInformation1;
         private System.Windows.Forms.Button bChanger1;
         private System.Windows.Forms.Button bCap3J1;
         private System.Windows.Forms.Button bCap4J1;

@@ -110,7 +110,15 @@ namespace JeuxVideo_MemeLegend
 
         private void bLancer_Click(object sender, EventArgs e)
         {
-
+            if(cbServeur.SelectedItem.ToString() == "Serveur")
+            {
+                ficCombatOnline f = new ficCombatOnline(Joueur, true, tbServeur.Text);
+            }
+            else
+            {
+                ficCombatOnline f = new ficCombatOnline(Joueur, false, tbServeur.Text);
+            }
+            
         }
 
         
