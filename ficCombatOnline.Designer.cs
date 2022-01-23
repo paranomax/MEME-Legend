@@ -84,21 +84,23 @@ namespace JeuxVideo_MemeLegend
             // 
             // bSauvegarder
             // 
-            this.bSauvegarder.Location = new System.Drawing.Point(1090, 626);
+            this.bSauvegarder.Location = new System.Drawing.Point(6, 484);
             this.bSauvegarder.Name = "bSauvegarder";
-            this.bSauvegarder.Size = new System.Drawing.Size(145, 60);
+            this.bSauvegarder.Size = new System.Drawing.Size(213, 79);
             this.bSauvegarder.TabIndex = 25;
             this.bSauvegarder.Text = "Sauvergarder ";
             this.bSauvegarder.UseVisualStyleBackColor = true;
+            this.bSauvegarder.Click += new System.EventHandler(this.bSauvegarder_Click);
             // 
             // bQuitter
             // 
-            this.bQuitter.Location = new System.Drawing.Point(1241, 625);
+            this.bQuitter.Location = new System.Drawing.Point(1170, 550);
             this.bQuitter.Name = "bQuitter";
-            this.bQuitter.Size = new System.Drawing.Size(145, 60);
+            this.bQuitter.Size = new System.Drawing.Size(228, 70);
             this.bQuitter.TabIndex = 24;
             this.bQuitter.Text = "Quitter";
             this.bQuitter.UseVisualStyleBackColor = true;
+            this.bQuitter.Click += new System.EventHandler(this.bQuitter_Click);
             // 
             // bChanger1
             // 
@@ -114,7 +116,7 @@ namespace JeuxVideo_MemeLegend
             // bCap3J1
             // 
             this.bCap3J1.Font = new System.Drawing.Font("Minecraftia", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bCap3J1.Location = new System.Drawing.Point(17, 372);
+            this.bCap3J1.Location = new System.Drawing.Point(17, 273);
             this.bCap3J1.Name = "bCap3J1";
             this.bCap3J1.Size = new System.Drawing.Size(189, 38);
             this.bCap3J1.TabIndex = 4;
@@ -125,7 +127,7 @@ namespace JeuxVideo_MemeLegend
             // bCap4J1
             // 
             this.bCap4J1.Font = new System.Drawing.Font("Minecraftia", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bCap4J1.Location = new System.Drawing.Point(17, 416);
+            this.bCap4J1.Location = new System.Drawing.Point(17, 317);
             this.bCap4J1.Name = "bCap4J1";
             this.bCap4J1.Size = new System.Drawing.Size(189, 38);
             this.bCap4J1.TabIndex = 3;
@@ -136,7 +138,7 @@ namespace JeuxVideo_MemeLegend
             // bCap2J1
             // 
             this.bCap2J1.Font = new System.Drawing.Font("Minecraftia", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bCap2J1.Location = new System.Drawing.Point(17, 327);
+            this.bCap2J1.Location = new System.Drawing.Point(17, 228);
             this.bCap2J1.Name = "bCap2J1";
             this.bCap2J1.Size = new System.Drawing.Size(189, 38);
             this.bCap2J1.TabIndex = 2;
@@ -147,7 +149,7 @@ namespace JeuxVideo_MemeLegend
             // bCap1J1
             // 
             this.bCap1J1.Font = new System.Drawing.Font("Minecraftia", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bCap1J1.Location = new System.Drawing.Point(17, 283);
+            this.bCap1J1.Location = new System.Drawing.Point(17, 184);
             this.bCap1J1.Name = "bCap1J1";
             this.bCap1J1.Size = new System.Drawing.Size(189, 38);
             this.bCap1J1.TabIndex = 1;
@@ -175,6 +177,7 @@ namespace JeuxVideo_MemeLegend
             this.BoxJ1.Controls.Add(this.bCap2J1);
             this.BoxJ1.Controls.Add(this.bCap1J1);
             this.BoxJ1.Controls.Add(this.lbJ1);
+            this.BoxJ1.Controls.Add(this.bSauvegarder);
             this.BoxJ1.Enabled = false;
             this.BoxJ1.Font = new System.Drawing.Font("Minecraftia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BoxJ1.Location = new System.Drawing.Point(20, 50);
@@ -427,7 +430,7 @@ namespace JeuxVideo_MemeLegend
             this.lbJ2.ItemHeight = 23;
             this.lbJ2.Location = new System.Drawing.Point(1170, 431);
             this.lbJ2.Name = "lbJ2";
-            this.lbJ2.Size = new System.Drawing.Size(189, 73);
+            this.lbJ2.Size = new System.Drawing.Size(228, 73);
             this.lbJ2.TabIndex = 7;
             this.lbJ2.SelectedIndexChanged += new System.EventHandler(this.lbJ2_SelectedIndexChanged);
             // 
@@ -509,7 +512,7 @@ namespace JeuxVideo_MemeLegend
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGreen;
-            this.ClientSize = new System.Drawing.Size(1410, 733);
+            this.ClientSize = new System.Drawing.Size(1417, 631);
             this.Controls.Add(this.lJ2);
             this.Controls.Add(this.LifeJ2);
             this.Controls.Add(this.lJ1);
@@ -520,13 +523,15 @@ namespace JeuxVideo_MemeLegend
             this.Controls.Add(this.lJoueur2);
             this.Controls.Add(this.lbJ2);
             this.Controls.Add(this.gbInfo);
-            this.Controls.Add(this.bSauvegarder);
             this.Controls.Add(this.bQuitter);
             this.Controls.Add(this.BoxJ1);
             this.Controls.Add(this.lTitre);
             this.Controls.Add(this.tbTexte);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ficCombatOnline";
             this.Text = "ficCombatOnline";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ficCombatOnline_FormClosing);
             this.Load += new System.EventHandler(this.ficCombatOnline_Load);
             this.BoxJ1.ResumeLayout(false);
             this.gbInfo.ResumeLayout(false);

@@ -15,48 +15,48 @@ namespace JeuxVideo_MemeLegend
         public String Nom, Type;
         public int i;
         public NewCapacite[] techniques = new NewCapacite[4];
-        public string[] capacite = new string[4];
-        public static Dictionary<string, NewCapacite> ListCapacite = new Dictionary<string, NewCapacite>()
+        public int[] capacite = new int[4];
+        public static Dictionary<int, NewCapacite> ListCapacite = new Dictionary<int, NewCapacite>()
         {
-            {"trempette", new NewCapacite("trempette", "Neutre", 0, 1, false, 1) },
-            {"comeback", new NewCapacite("Come back des muppets", "Normal", 70, 0, false, 2) },
-            {"Showbiz", new NewCapacite("Showbiz", "Neutre", 0, 2, false, 3) },
-            {"Lancethe", new NewCapacite("Lance-Thé", "Eau", 65, 0, true, 4) },
-            {"RageOn", new NewCapacite("Rage-On", "Psy", 0, 3, true, 5) },
-            {"SmugFace", new NewCapacite("Smug Face", "Neutre", 0, 4, true, 6) },
-            {"CyberHarcel", new NewCapacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },
-            {"Invest", new NewCapacite("Investissement", "Neutre", 0, 5, true, 8) },
-            {"LanceFlam", new NewCapacite("Lance-Flamme", "Feu", 65, 0, true, 9) },
-            {"MeteorTesla", new NewCapacite("Météor Tesla", "Milliardaire", 80, 6, true, 10) },
-            {"ClaqueLias", new NewCapacite("Claque de Liasse", "Milliardaire", 60, 0, false, 11) },
-            {"Weed",new NewCapacite("Weed?", "Poison", 75, 7, true, 12) },
-            {"NuageTox", new NewCapacite("Nuage Toxique", "Poison", 65, 0, true, 13) },
-            {"Feat", new NewCapacite("Feat", "Neutre", 0, 8, false, 14) },
-            {"TuAime", new NewCapacite("Tu aime ça ?", "Normal", 30, 9, true, 15) },
-            {"puissance", new NewCapacite("Puissance", "Combat", 0, 10, false, 16) },
-            {"CloseCombat", new NewCapacite("Close Combat", "Combat", 80, 11, false, 17) },
-            {"Seduction",new NewCapacite("Séduction", "Neutre", 0, 12, true, 18) },
-            {"SilenceWench", new NewCapacite("Silence Wench", "Normal", 70, 0, false, 19) },
-            {"Angery", new NewCapacite("Angery", "Neutre", 0, 13, false, 20) },
-            {"ShibeIs", new NewCapacite("Shibe Is King", "Neutre", 0, 14, false, 21) },
-            {"CopyClaim", new NewCapacite("CopyClaim", "Copyright", 60, 15, true, 22) },
-            {"noPants", new NewCapacite("No Pants", "Neutre", 0, 13, false, 23) },
-            {"ClaqueBec", new NewCapacite("Claque Bec", "Normal", 65, 0, false, 24) },
-            {"WorldOnFire", new NewCapacite("World On Fire", "Feu", 30, 16, true, 25)},
-            {"SacrificeForL", new NewCapacite("Sacrifice For The Lords", "Feu", 80, 0, true, 26)},
-            {"PurificationInFire", new NewCapacite("Purification In Fire", "Neutre", 0, 17, false, 27) },
-            {"Waahaha", new NewCapacite("Waahaha", "Inconnue", 10, 14, true, 28) },
-            {"Heyeahyeah", new NewCapacite("Heyeahyeahyeah", "Inconnu", 40, 19, false, 30) },
-            {"WaluigiTime", new NewCapacite("Waluigi Time !", "Inconnu", 20, 18, true, 29) },
-            {"Smash", new NewCapacite("Smash", "Inconnu", 70, 0, false, 31)},
-            {"NeRienFaire", new NewCapacite("ne rien faire", "Normal", 0, 0, false, 0) }
+            {1, new NewCapacite("trempette", "Neutre", 0, 1, false, 1) },//1 trempette
+            {2, new NewCapacite("Come back des muppets", "Normal", 70, 0, false, 2) },//2 comeback
+            {3, new NewCapacite("Showbiz", "Neutre", 0, 2, false, 3) },//3showbiz
+            {4, new NewCapacite("Lance-Thé", "Eau", 65, 0, true, 4) },//4lancethe
+            {5, new NewCapacite("Rage-On", "Psy", 0, 3, true, 5) },//5rageon
+            {6, new NewCapacite("Smug Face", "Neutre", 0, 4, true, 6) },//6smugface
+            {7, new NewCapacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },//7cyberharcel
+            {8, new NewCapacite("Investissement", "Neutre", 0, 5, true, 8) },//8invest
+            {9, new NewCapacite("Lance-Flamme", "Feu", 65, 0, true, 9) },//9LanceFlam
+            {10, new NewCapacite("Météor Tesla", "Milliardaire", 80, 6, true, 10) },//10MeteorTesla
+            {11, new NewCapacite("Claque de Liasse", "Milliardaire", 60, 0, false, 11) },//11ClaqueLias
+            {12,new NewCapacite("Weed?", "Poison", 75, 7, true, 12) },//12Weed
+            {13, new NewCapacite("Nuage Toxique", "Poison", 65, 0, true, 13) },//13NuageTox
+            {14, new NewCapacite("Feat", "Neutre", 0, 8, false, 14) },//14Feat
+            {15, new NewCapacite("Tu aime ça ?", "Normal", 30, 9, true, 15) },//15TuAime
+            {16, new NewCapacite("Puissance", "Combat", 0, 10, false, 16) },//16puissance
+            {17, new NewCapacite("Close Combat", "Combat", 80, 11, false, 17) },//17CloseCombat
+            {18,new NewCapacite("Séduction", "Neutre", 0, 12, true, 18) },//18Seduction
+            {19, new NewCapacite("Silence Wench", "Normal", 70, 0, false, 19) },//19SilenceWench
+            {20, new NewCapacite("Angery", "Neutre", 0, 13, false, 20) },//20Angery
+            {21, new NewCapacite("Shibe Is King", "Neutre", 0, 14, false, 21) },//21ShibeIs
+            {22, new NewCapacite("CopyClaim", "Copyright", 60, 15, true, 22) },//22CopyClaim
+            {23, new NewCapacite("No Pants", "Neutre", 0, 13, false, 23) },//23noPants
+            {24, new NewCapacite("Claque Bec", "Normal", 65, 0, false, 24) },//24ClaqueBec
+            {25, new NewCapacite("World On Fire", "Feu", 30, 16, true, 25)},//25WorldOnFire
+            {26, new NewCapacite("Sacrifice For The Lords", "Feu", 80, 0, true, 26)},//26SacrificeForL
+            {27, new NewCapacite("Purification In Fire", "Neutre", 0, 17, false, 27) },//27PurificationInFire
+            {28, new NewCapacite("Waahaha", "Inconnue", 10, 14, true, 28) },//28Waahaha
+            {29, new NewCapacite("Heyeahyeahyeah", "Inconnu", 40, 19, false, 30) },//29Heyeahyeah
+            {30, new NewCapacite("Waluigi Time !", "Inconnu", 20, 18, true, 29) },//30WaluigiTime
+            {31, new NewCapacite("Smash", "Inconnu", 70, 0, false, 31)},//31Smash
+            {32, new NewCapacite("ne rien faire", "Normal", 0, 0, false, 0) }//32NeRienFaire
         };
 
 
         private int HP_, HPMax_, Attaque_, AttaqueSpec_, Defense_, DefenseSpec_;
 
         #region constructeur
-        public NewCreature(string Nom, String Type, int HP, int HPMax, int Attaque, int AttaqueSpec, int Defense, int DefenseSpec, string[] IDcapacite)
+        public NewCreature(string Nom, String Type, int HP, int HPMax, int Attaque, int AttaqueSpec, int Defense, int DefenseSpec, int[] IDcapacite)
         {
             this.Nom = Nom;
             this.Type = Type;
@@ -77,8 +77,8 @@ namespace JeuxVideo_MemeLegend
                 }
                 else
                 {
-                    techniques[i] = ListCapacite["NeRienFaire"];
-                    capacite[i] = "NeRienFaire";
+                    techniques[i] = ListCapacite[32];
+                    capacite[i] = 32;
                 }
                     
             }

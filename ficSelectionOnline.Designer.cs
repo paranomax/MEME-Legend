@@ -57,11 +57,6 @@ namespace JeuxVideo_MemeLegend
             this.gbJ1 = new System.Windows.Forms.GroupBox();
             this.clbJ1 = new System.Windows.Forms.ListBox();
             this.pMenu = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lServeur = new System.Windows.Forms.Label();
-            this.lConnection = new System.Windows.Forms.Label();
-            this.tbServeur = new System.Windows.Forms.TextBox();
-            this.cbServeur = new System.Windows.Forms.ComboBox();
             this.PbWaluigi = new System.Windows.Forms.PictureBox();
             this.pbPepe = new System.Windows.Forms.PictureBox();
             this.pbRicardo = new System.Windows.Forms.PictureBox();
@@ -71,10 +66,14 @@ namespace JeuxVideo_MemeLegend
             this.pbdoggo = new System.Windows.Forms.PictureBox();
             this.pbDonald = new System.Windows.Forms.PictureBox();
             this.pbKermit = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbServeur = new System.Windows.Forms.ComboBox();
+            this.tbServeur = new System.Windows.Forms.TextBox();
+            this.lConnection = new System.Windows.Forms.Label();
+            this.lServeur = new System.Windows.Forms.Label();
             this.gbInfo.SuspendLayout();
             this.gbJ1.SuspendLayout();
             this.pMenu.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbWaluigi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPepe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRicardo)).BeginInit();
@@ -84,6 +83,7 @@ namespace JeuxVideo_MemeLegend
             ((System.ComponentModel.ISupportInitialize)(this.pbdoggo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDonald)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbKermit)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bLancer
@@ -377,55 +377,6 @@ namespace JeuxVideo_MemeLegend
             this.pMenu.Size = new System.Drawing.Size(495, 495);
             this.pMenu.TabIndex = 8;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.cbServeur);
-            this.groupBox1.Controls.Add(this.tbServeur);
-            this.groupBox1.Controls.Add(this.lConnection);
-            this.groupBox1.Controls.Add(this.lServeur);
-            this.groupBox1.Location = new System.Drawing.Point(11, 275);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(204, 279);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Parametre Connection";
-            // 
-            // lServeur
-            // 
-            this.lServeur.AutoSize = true;
-            this.lServeur.Location = new System.Drawing.Point(7, 22);
-            this.lServeur.Name = "lServeur";
-            this.lServeur.Size = new System.Drawing.Size(58, 17);
-            this.lServeur.TabIndex = 0;
-            this.lServeur.Text = "Serveur";
-            // 
-            // lConnection
-            // 
-            this.lConnection.AutoSize = true;
-            this.lConnection.Location = new System.Drawing.Point(7, 78);
-            this.lConnection.Name = "lConnection";
-            this.lConnection.Size = new System.Drawing.Size(176, 17);
-            this.lConnection.TabIndex = 1;
-            this.lConnection.Text = "Se connecter en tant que :";
-            // 
-            // tbServeur
-            // 
-            this.tbServeur.Location = new System.Drawing.Point(6, 43);
-            this.tbServeur.Name = "tbServeur";
-            this.tbServeur.Size = new System.Drawing.Size(177, 22);
-            this.tbServeur.TabIndex = 2;
-            // 
-            // cbServeur
-            // 
-            this.cbServeur.FormattingEnabled = true;
-            this.cbServeur.Items.AddRange(new object[] {
-            "Serveur",
-            "Client"});
-            this.cbServeur.Location = new System.Drawing.Point(6, 99);
-            this.cbServeur.Name = "cbServeur";
-            this.cbServeur.Size = new System.Drawing.Size(177, 24);
-            this.cbServeur.TabIndex = 3;
-            // 
             // PbWaluigi
             // 
             this.PbWaluigi.Image = global::JeuxVideo_MemeLegend.Properties.Resources.Waluigiph;
@@ -525,6 +476,55 @@ namespace JeuxVideo_MemeLegend
             this.pbKermit.TabStop = false;
             this.pbKermit.Click += new System.EventHandler(this.pbKermit_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cbServeur);
+            this.groupBox1.Controls.Add(this.tbServeur);
+            this.groupBox1.Controls.Add(this.lConnection);
+            this.groupBox1.Controls.Add(this.lServeur);
+            this.groupBox1.Location = new System.Drawing.Point(11, 275);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(204, 279);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Parametre Connection";
+            // 
+            // cbServeur
+            // 
+            this.cbServeur.FormattingEnabled = true;
+            this.cbServeur.Items.AddRange(new object[] {
+            "Serveur",
+            "Client"});
+            this.cbServeur.Location = new System.Drawing.Point(6, 99);
+            this.cbServeur.Name = "cbServeur";
+            this.cbServeur.Size = new System.Drawing.Size(177, 24);
+            this.cbServeur.TabIndex = 3;
+            // 
+            // tbServeur
+            // 
+            this.tbServeur.Location = new System.Drawing.Point(6, 43);
+            this.tbServeur.Name = "tbServeur";
+            this.tbServeur.Size = new System.Drawing.Size(177, 22);
+            this.tbServeur.TabIndex = 2;
+            // 
+            // lConnection
+            // 
+            this.lConnection.AutoSize = true;
+            this.lConnection.Location = new System.Drawing.Point(7, 78);
+            this.lConnection.Name = "lConnection";
+            this.lConnection.Size = new System.Drawing.Size(176, 17);
+            this.lConnection.TabIndex = 1;
+            this.lConnection.Text = "Se connecter en tant que :";
+            // 
+            // lServeur
+            // 
+            this.lServeur.AutoSize = true;
+            this.lServeur.Location = new System.Drawing.Point(7, 22);
+            this.lServeur.Name = "lServeur";
+            this.lServeur.Size = new System.Drawing.Size(58, 17);
+            this.lServeur.TabIndex = 0;
+            this.lServeur.Text = "Serveur";
+            // 
             // ficSelectionOnline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -542,13 +542,12 @@ namespace JeuxVideo_MemeLegend
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "ficSelectionOnline";
             this.Text = "ficSelectionOnline";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ficSelectionOnline_FormClosing);
             this.Load += new System.EventHandler(this.ficSelectionOnline_Load);
             this.gbInfo.ResumeLayout(false);
             this.gbInfo.PerformLayout();
             this.gbJ1.ResumeLayout(false);
             this.pMenu.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbWaluigi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPepe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRicardo)).EndInit();
@@ -558,6 +557,8 @@ namespace JeuxVideo_MemeLegend
             ((System.ComponentModel.ISupportInitialize)(this.pbdoggo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDonald)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbKermit)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

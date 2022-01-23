@@ -35,11 +35,11 @@ namespace JeuxVideo_MemeLegend
             int degats = 0;
             if (NoSp == false)
             {
-                degats = ((25 * Puissance * j1.Attaque) / (40 * (j2.Defense)));
+                degats = ((10+(20 * Puissance * j1.Attaque)) /(10+ (40 * (j2.Defense))));
             }
             else
             {
-                degats = ((25 * Puissance * j1.AttaqueSpec) / (40 * (j2.DefenseSpec)));
+                degats = ((10 +(20 * Puissance * j1.AttaqueSpec)) / (10+ (30 * (j2.DefenseSpec))));
             }
             degats = (int)(degats * tableType(this.Type, j2.Type));
             return degats;

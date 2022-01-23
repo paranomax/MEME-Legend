@@ -35,6 +35,9 @@
             this.ofdOuvrir = new System.Windows.Forms.OpenFileDialog();
             this.bOnline = new System.Windows.Forms.Button();
             this.bChargerOnline = new System.Windows.Forms.Button();
+            this.lServeur = new System.Windows.Forms.Label();
+            this.tbServeur = new System.Windows.Forms.TextBox();
+            this.bRejoindre = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lTitre
@@ -65,7 +68,7 @@
             this.lQuitter.AutoSize = true;
             this.lQuitter.BackColor = System.Drawing.Color.CadetBlue;
             this.lQuitter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lQuitter.Location = new System.Drawing.Point(349, 365);
+            this.lQuitter.Location = new System.Drawing.Point(344, 433);
             this.lQuitter.Name = "lQuitter";
             this.lQuitter.Size = new System.Drawing.Size(60, 20);
             this.lQuitter.TabIndex = 3;
@@ -107,13 +110,44 @@
             this.bChargerOnline.TabIndex = 6;
             this.bChargerOnline.Text = "Charger un partie en ligne";
             this.bChargerOnline.UseVisualStyleBackColor = true;
+            this.bChargerOnline.Click += new System.EventHandler(this.bChargerOnline_Click);
+            // 
+            // lServeur
+            // 
+            this.lServeur.AutoSize = true;
+            this.lServeur.Location = new System.Drawing.Point(185, 340);
+            this.lServeur.Name = "lServeur";
+            this.lServeur.Size = new System.Drawing.Size(58, 17);
+            this.lServeur.TabIndex = 7;
+            this.lServeur.Text = "Serveur";
+            // 
+            // tbServeur
+            // 
+            this.tbServeur.Location = new System.Drawing.Point(124, 355);
+            this.tbServeur.Name = "tbServeur";
+            this.tbServeur.Size = new System.Drawing.Size(183, 22);
+            this.tbServeur.TabIndex = 8;
+            // 
+            // bRejoindre
+            // 
+            this.bRejoindre.Font = new System.Drawing.Font("Minecraftia", 7.8F);
+            this.bRejoindre.Location = new System.Drawing.Point(124, 384);
+            this.bRejoindre.Name = "bRejoindre";
+            this.bRejoindre.Size = new System.Drawing.Size(183, 69);
+            this.bRejoindre.TabIndex = 9;
+            this.bRejoindre.Text = "Rejoindre une partie chargée";
+            this.bRejoindre.UseVisualStyleBackColor = true;
+            this.bRejoindre.Click += new System.EventHandler(this.bRejoindre_Click);
             // 
             // fPrincipale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGreen;
-            this.ClientSize = new System.Drawing.Size(432, 403);
+            this.ClientSize = new System.Drawing.Size(430, 465);
+            this.Controls.Add(this.bRejoindre);
+            this.Controls.Add(this.tbServeur);
+            this.Controls.Add(this.lServeur);
             this.Controls.Add(this.bChargerOnline);
             this.Controls.Add(this.bOnline);
             this.Controls.Add(this.bCharger);
@@ -139,6 +173,9 @@
         private System.Windows.Forms.OpenFileDialog ofdOuvrir;
         private System.Windows.Forms.Button bOnline;
         private System.Windows.Forms.Button bChargerOnline;
+        private System.Windows.Forms.Label lServeur;
+        private System.Windows.Forms.TextBox tbServeur;
+        private System.Windows.Forms.Button bRejoindre;
     }
 }
 

@@ -27,10 +27,10 @@ namespace JeuxVideo_MemeLegend
         bool tour = true; //true -> j1 false => j2
         bool Status, debut;
         private string sFichier = "";
-        public ficCombatOnline(NewCreature[] equipeJ1, bool Status, string NomServeur)
+        public ficCombatOnline(NewCreature[] equipeJ1, bool Status, string NomServeur)//debut complet
         {
             InitializeComponent();
-            debut = false;
+            debut = true;
             joueur1 = equipeJ1;
             sServeur = null;
             sClient = null;
@@ -45,24 +45,48 @@ namespace JeuxVideo_MemeLegend
 
             if (Status == true) //serveur
             {
-                debut = true;
+                
                 tour = true;
                 tbTexte.Text = "En Attente d'un Joueur";
                 ConnectionServeur();
+                bSauvegarder.Enabled = true;
                 
             }
             else //client
             {
-                debut = false;
                 tour = false;
                 tbTexte.Text = "Recherche de joueur";
                 ConnectionClient(NomServeur);
+                bSauvegarder.Enabled = false;
             }
 
         }
+
+        public ficCombatOnline(NewCreature[] equipeJ1, NewCreature[] equipeJ2, bool start, int j1, int j2)//debut charger en tant que serveur
+        {
+            InitializeComponent();
+            joueur1 = equipeJ1;
+            joueur2 = equipeJ2;
+            debut = false;
+        }
+
+        public ficCombatOnline(string serveur )//debut charger en tant que client
+        {
+            InitializeComponent();
+            debut = false;
+            tbTexte.Text = "Recherche de joueur";
+            bSauvegarder.Enabled = false;
+            ConnectionClient(serveur);
+
+        }
+
         private void ficCombatOnline_Load(object sender, EventArgs e)
         {
-
+           
+        }
+        private void ficCombatOnline_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Deconnection();
         }
 
         #region Gestion Connection
@@ -192,23 +216,21 @@ namespace JeuxVideo_MemeLegend
             }
         }
 
-        private void Deconnection(object sender, EventArgs e)
+        private void Deconnection()
         {
-            /*if (sServeur == null)
+            if (sServeur == null)
             {
-                sClient.Send(Encoding.Unicode.GetBytes("Déconnection (client)"));
+                sClient.Send(Encoding.Unicode.GetBytes("m/ deconnection/"));
+                MajBoite();
+                sClient.Send(Encoding.Unicode.GetBytes("close/"));
                 sClient.Shutdown(SocketShutdown.Both);
                 sClient.BeginDisconnect(false, new AsyncCallback(SurDemandeDeconnexion), sClient);
-                mcsConnecter.Enabled = mcsEcouter.Enabled = true;
-                mcsDeconnecter.Enabled = false;
             }
             else if (sClient == null)
             {
                 sServeur.Close();
-                mcsConnecter.Enabled = mcsEcouter.Enabled = true;
-                mcsDeconnecter.Enabled = false;
                 sServeur = null;
-            }*/
+            }
         }
 
         private void SurDemandeDeconnexion(IAsyncResult iAR)
@@ -294,6 +316,9 @@ namespace JeuxVideo_MemeLegend
                 case "hello":
                     MessageBox.Show("hello identifie cote serveur");
                     break;
+                case "change":
+                    checkChange();
+                    break;
                 default:
                     MessageBox.Show("Impossible à decode cote serveur");
                     for(int i = 0;i< Message.Length; i++)
@@ -326,6 +351,9 @@ namespace JeuxVideo_MemeLegend
                 case "m": //message a afficher
                     tbTexte.Text = Message[1];
                     MajBoite();
+                    break;
+                case "box":
+                    MessageBox.Show(Message[1]);
                     break;
                 case "c1": //reception creature renvoie c1
                     joueur2[0] = StringToCrea(Message);
@@ -379,6 +407,33 @@ namespace JeuxVideo_MemeLegend
                 case "MajHp":
                     MajHp();
                     break;
+                case "Changeimage":
+                    ChangeImage(pbJ1, creaJ1 );
+                    ChangeImage(pbJ2, creaJ2);
+                    break;
+                case "MajComplete":
+                    MajComplete();
+                    break;
+                case "changeMeme":
+                    creaJ2 = joueur2[Int32.Parse(Message[1])];
+                    break;
+                case "OKChange":
+                    creaJ1 = joueur1[lbJ1.SelectedIndex];
+                    bCap1J1.Enabled = true;
+                    bCap2J1.Enabled = true;
+                    bCap3J1.Enabled = true;
+                    bCap4J1.Enabled = true;
+                    break;
+                case "doitchange":
+                    BoxJ1.Enabled = true;
+                    bCap1J1.Enabled = false;
+                    bCap2J1.Enabled = false;
+                    bCap3J1.Enabled = false;
+                    bCap4J1.Enabled = false;
+                    break;
+                case "close":
+                    Close();
+                    break;
                 case "hello":
                     MessageBox.Show("hello identifie cote client");
                     break;
@@ -399,46 +454,131 @@ namespace JeuxVideo_MemeLegend
         #endregion
 
         #region gestion bouton
+
+        private void bQuitter_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void bSauvegarder_Click(object sender, EventArgs e)
+        {
+            if (sfdEnregistrer.ShowDialog() == DialogResult.OK)
+            {
+                sFichier = sfdEnregistrer.FileName;
+                StreamWriter sw = new StreamWriter(sFichier);
+
+                //on parcours les equipes
+                for (int i = 0; i < 3; i++)
+                {
+                    sw.WriteLine(joueur1[i].Nom + ";" +
+                                 joueur1[i].Type + ";" +
+                                 joueur1[i].HP.ToString() + ";" +
+                                 joueur1[i].HPMax.ToString() + ";" +
+                                 joueur1[i].Attaque.ToString() + ";" +
+                                 joueur1[i].AttaqueSpec.ToString() + ";" +
+                                 joueur1[i].Defense.ToString() + ";" +
+                                 joueur1[i].DefenseSpec.ToString() + ";" +
+                                 joueur1[i].capacite[0] + ";" +
+                                 joueur1[i].capacite[1] + ";" +
+                                 joueur1[i].capacite[2] + ";" +
+                                 joueur1[i].capacite[3]);
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    sw.WriteLine(joueur2[i].Nom + ";" +
+                                 joueur2[i].Type + ";" +
+                                 joueur2[i].HP.ToString() + ";" +
+                                 joueur2[i].HPMax.ToString() + ";" +
+                                 joueur2[i].Attaque.ToString() + ";" +
+                                 joueur2[i].AttaqueSpec.ToString() + ";" +
+                                 joueur2[i].Defense.ToString() + ";" +
+                                 joueur2[i].DefenseSpec.ToString() + ";" +
+                                 joueur2[i].capacite[0] + ";" +
+                                 joueur2[i].capacite[1] + ";" +
+                                 joueur2[i].capacite[2] + ";" +
+                                 joueur2[i].capacite[3]);
+                }
+                if (tour == true)
+                    sw.WriteLine("1");
+                else
+                    sw.WriteLine("2");
+                sw.Close();
+            }
+        }
         private void bChanger1_Click(object sender, EventArgs e)
         {
             if (Status)
             {
                 //applique de son cote et envoie l info
+                if (lbJ1.SelectedIndex >= 0)
+                {
+                    if (creaJ1 == joueur1[lbJ1.SelectedIndex])
+                    {
+                        MessageBox.Show("attention il s'agit du même meme");
+                    }
+                    else if (lbJ1.Items[lbJ1.SelectedIndex].ToString() == "RIP")
+                    {
+                        MessageBox.Show("Vous voulez envoyer un cadavre ??");
+                    }
+                    else
+                    {
+                        creaJ1 = joueur1[lbJ1.SelectedIndex];
+                        sClient.Send(Encoding.Unicode.GetBytes("changeMeme/" + lbJ1.SelectedIndex + "/"));
+                        tbTexte.Text = creaJ1.Nom + " !! en Avant !!";
+                        sClient.Send(Encoding.Unicode.GetBytes("m/" + tbTexte.Text + "/"));
+                        MajBoite();
+                        MajComplete();
+                        // MenuJ1_Paint(null, null); //maj des boutons
+                        bCap1J1.Enabled = true;
+                        bCap2J1.Enabled = true;
+                        bCap3J1.Enabled = true;
+                        bCap4J1.Enabled = true;
+                        //MenuJ1.Enabled = true;
+                        //bCap1J1.Enabled = bCap2J1.Enabled = bCap3J1.Enabled = bCap4J1.Enabled = true;
+                        changetour();
+                    }
+                }
+                else
+                    MessageBox.Show("vous devez d'abord choisir le meme à échanger !!");
             }
             else
             {
+                sClient.Send(Encoding.Unicode.GetBytes("change/"+lbJ1.SelectedIndex));
                 //envoie ordre, gere une fonction de l autre cote
                 //faire une fonction qui dit si ok
             }
-            if (lbJ1.SelectedIndex >= 0)
+            
+
+        }
+
+        public void checkChange()
+        {
+            int num = Int32.Parse(Message[1]);
+            if(num >= 0)
             {
-                if (creaJ1 == joueur1[lbJ1.SelectedIndex])
+                if(joueur2[num] == creaJ2)
                 {
-                    MessageBox.Show("attention il s'agit du même meme");
+                    sClient.Send(Encoding.Unicode.GetBytes("box/attention il s'agit du meme"));
                 }
-                else if (lbJ1.Items[lbJ1.SelectedIndex].ToString() == "RIP")
+                else if (lbJ2.Items[num].ToString() == "RIP")
                 {
-                    MessageBox.Show("Vous voulez envoyer un cadavre ??");
+                    sClient.Send(Encoding.Unicode.GetBytes("box/Vous voulez envoyer un cadavre ??/"));
                 }
                 else
                 {
-                    creaJ1 = joueur1[lbJ1.SelectedIndex];
-                    if(Status)
-                        tbTexte.Text = creaJ1.Nom + " !! en Avant !!";
-                    sClient.Send(Encoding.Unicode.GetBytes("m/"+tbTexte.Text+"/"));
-                    tbTexte.Refresh();
-                    Application.DoEvents();
-                    Thread.Sleep(1500);
-                   // MenuJ1_Paint(null, null); //maj des boutons
-                    ChangeImage(pbJ1, creaJ1);
-                    MajHp();
-                    //MenuJ1.Enabled = true;
-                    //bCap1J1.Enabled = bCap2J1.Enabled = bCap3J1.Enabled = bCap4J1.Enabled = true;
+                    creaJ2 = joueur2[num];
+                    sClient.Send(Encoding.Unicode.GetBytes("OKChange/"));
+                    tbTexte.Text = creaJ2.Nom + " !! en Avant !!";
+                    sClient.Send(Encoding.Unicode.GetBytes("m/" + tbTexte.Text + "/"));
+                    MajBoite();
+                    MajComplete();
                     changetour();
                 }
             }
             else
-                MessageBox.Show("vous devez d'abord choisir le meme à échanger !!");
+            {
+                sClient.Send(Encoding.Unicode.GetBytes("box/ Veullier choisir un meme à echanger/"));
+            }
         }
         private void bCap1J1_Click(object sender, EventArgs e)
         {
@@ -501,14 +641,17 @@ namespace JeuxVideo_MemeLegend
             }
         }
 
-        private void attaque(int att)
-        {
-
-        }
-
         private void lbJ1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            majCreature(joueur1[lbJ1.SelectedIndex]);
+            try
+            {
+                majCreature(joueur1[lbJ1.SelectedIndex]);
+            }
+            catch(Exception err)
+            {
+
+            }
+            
         }
 
         private void lbJ2_SelectedIndexChanged(object sender, EventArgs e)
@@ -556,12 +699,12 @@ namespace JeuxVideo_MemeLegend
 
         private NewCreature StringToCrea(string[] text)
         {
-            string[] idcap = new string[4]
+            int[] idcap = new int[4]
             {
-                 text[9] ,
-                 text[10] ,
-                 text[11] ,
-                 text[12] 
+                 Int32.Parse(text[9]) ,
+                 Int32.Parse(text[10]) ,
+                 Int32.Parse(text[11]) ,
+                 Int32.Parse(text[12]) 
             };
             NewCreature crea = new NewCreature(text[1], //nom
                                                 text[2],//type
@@ -616,6 +759,8 @@ namespace JeuxVideo_MemeLegend
             {
                 tbTexte.Text = "erreur de chargement d image";
             }
+            if (Status)
+                sClient.Send(Encoding.Unicode.GetBytes("Changeimage/"));
             
         }
         private void changetour()
@@ -663,7 +808,7 @@ namespace JeuxVideo_MemeLegend
             pause();
             tbTexte.Text = (J1.Nom + " utilise " + J1.techniques[i].Nom + " !!!");
             //sClient.Send(Encoding.Unicode.GetBytes("m/" + J1.Nom + " utilise " + J1.techniques[i].Nom + " !!!"));
-            sClient.Send(Encoding.Unicode.GetBytes("m/y a une attaque !"));
+            sClient.Send(Encoding.Unicode.GetBytes("m/"+ tbTexte.Text+"/"));
             MajBoite();
 
             degat = J1.techniques[i].genererdegat(J1, J2);
@@ -682,19 +827,19 @@ namespace JeuxVideo_MemeLegend
 
             tbTexte.Text = J1.Nom + " inflige " + degat.ToString() + " points de dégats";
             //sClient.Send(Encoding.Unicode.GetBytes("m/"+J1.Nom + " inflige " + degat.ToString() + " points de dégats/"));
-            sClient.Send(Encoding.Unicode.GetBytes("m/une attaque fait des degat/"));
+            sClient.Send(Encoding.Unicode.GetBytes("m/" + tbTexte.Text + "/"));
             MajBoite();
 
             if (J1.techniques[i].tableType(J1.techniques[i].Type, J2.Type) == 2)
             {
                 tbTexte.Text = "C'est super efficace !";
-                sClient.Send(Encoding.Unicode.GetBytes("m/C'est super efficace !"));
+                sClient.Send(Encoding.Unicode.GetBytes("m/" + tbTexte.Text + "/"));
                 MajBoite();
             }
             else if (J1.techniques[i].tableType(J1.techniques[i].Type, J2.Type) == 0.5)
             {
                 tbTexte.Text = "Ce n'est pas très efficace";
-                sClient.Send(Encoding.Unicode.GetBytes("m/Ce n'est pas très efficace"));
+                sClient.Send(Encoding.Unicode.GetBytes("m/" + tbTexte.Text + "/"));
 
                 MajBoite();
             }
@@ -740,6 +885,7 @@ namespace JeuxVideo_MemeLegend
                 tbTexte.Text = creaJ1.Nom + " est KO !!";
                 sClient.Send(Encoding.Unicode.GetBytes("m/" + creaJ1.Nom + " est KO !!/"));
                 MajBoite();
+                
                 for (int i = 0; i < 3; i++)
                 {
                     if (creaJ1 == joueur1[i])
@@ -756,6 +902,10 @@ namespace JeuxVideo_MemeLegend
                     sClient.Send(Encoding.Unicode.GetBytes("m/Serveur choisi un meme/"));
                     MajBoite();
                     BoxJ1.Enabled = true;
+                    bCap1J1.Enabled = false;
+                    bCap2J1.Enabled = false;
+                    bCap3J1.Enabled = false;
+                    bCap4J1.Enabled = false;
                     //BoxJ2.Enabled = false;
                     //MenuJ1.Enabled = false; bouton
                     // bCap1J1.Enabled = bCap2J1.Enabled = bCap3J1.Enabled = bCap4J1.Enabled = false;
@@ -779,10 +929,11 @@ namespace JeuxVideo_MemeLegend
                     FinPartie(1);
                 else
                 {
-                    tbTexte.Text = "J2, veuillez choisir un nouveau meme !";
-                    sClient.Send(Encoding.Unicode.GetBytes("m/Client, veuillez choisir un nouveau meme !/"));
+                    tbTexte.Text = "Client, veuillez choisir un nouveau meme !";
+                    sClient.Send(Encoding.Unicode.GetBytes("doitchange/"));
                     MajBoite();
-                    BoxJ1.Enabled = false;
+                    sClient.Send(Encoding.Unicode.GetBytes("m/" + tbTexte.Text + "/"));
+                    //BoxJ1.Enabled = false;
                     // bCap1J2.Enabled = bCap2J2.Enabled = bCap3J2.Enabled = bCap4J2.Enabled = false;
                 }
             }
@@ -799,6 +950,8 @@ namespace JeuxVideo_MemeLegend
             bCap3J1.Text = creaJ1.techniques[2].Nom;
             bCap4J1.Text = creaJ1.techniques[3].Nom;
             MajHp();
+            if (Status)
+                sClient.Send(Encoding.Unicode.GetBytes("MajComplete/"));
         }
         
 
@@ -825,6 +978,7 @@ namespace JeuxVideo_MemeLegend
         }
         private void FinPartie(int J) //false j1 true j2
         {
+            sClient.Send(Encoding.Unicode.GetBytes("box/Le joueur" + J + " a gagné !!!/"));
             MessageBox.Show("Le joueur" + J + " a gagné !!!");
             Close();
         }

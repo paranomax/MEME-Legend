@@ -29,55 +29,55 @@ namespace JeuxVideo_MemeLegend
 
         private void pbKermit_Click(object sender, EventArgs e)
         {
-            NewCreature = new NewCreature("Kermit", "Eau", 100, 100, 50, 70, 80, 85, new string[4] { "trempette", "comeback", "Showbiz", "Lancethe" });
+            NewCreature = new NewCreature("Kermit", "Eau", 100, 100, 50, 70, 80, 85, new int[4] { 1, 2, 3, 4});
             majInfo();
         }
 
         private void pbDonald_Click(object sender, EventArgs e)
         {
-            NewCreature = new NewCreature("Donald Duck", "Copyright", 90, 90, 65, 70, 70, 90, new string[4] { "CopyClaim", "noPants", "RageOn", "ClaqueBec" });
+            NewCreature = new NewCreature("Donald Duck", "Copyright", 90, 90, 65, 70, 70, 90, new int[4] { 22, 23, 5, 24});
             majInfo();
         }
 
         private void pbdoggo_Click(object sender, EventArgs e)
         {
-            NewCreature = new NewCreature("Doggo", "Normal", 120, 120, 85, 65, 65, 70, new string[4] { "SmugFace", "SilenceWench", "Angery", "ShibeIs" });
+            NewCreature = new NewCreature("Doggo", "Normal", 120, 120, 85, 65, 65, 70, new int[4] { 6, 19,20, 21 });
             majInfo();
         }
 
         private void pbElon_Click(object sender, EventArgs e)
         {
-            NewCreature = new NewCreature("Elon Musk", "Milliardaire", 90, 85, 75, 90, 65, 65, new string[4] { "Invest", "LanceFlam", "MeteorTesla", "ClaqueLias" });
+            NewCreature = new NewCreature("Elon Musk", "Milliardaire", 90, 85, 75, 90, 65, 65, new int[4] { 8, 9, 10, 11 });
             majInfo();
         }
 
         private void pbSnoop_Click(object sender, EventArgs e)
         {
-            NewCreature = new NewCreature("Snoop Dogg", "Poison", 110, 110, 50, 80, 85, 95, new string[4] { "Weed", "NuageTox", "Feat", "ClaqueLias" });
+            NewCreature = new NewCreature("Snoop Dogg", "Poison", 110, 110, 50, 80, 85, 95, new int[4] { 12, 13, 14, 11 });
             majInfo();
         }
 
         private void pbElmo_Click(object sender, EventArgs e)
         {
-            NewCreature = new NewCreature("Elmo", "Feu", 90, 90, 80, 95, 65, 65, new string[4] { "LanceFlam", "WorldOnFire", "SacrificeForL", "PurificationInFire" });
+            NewCreature = new NewCreature("Elmo", "Feu", 90, 90, 80, 95, 65, 65, new int[4] { 9, 25, 26, 27 });
             majInfo();
         }
 
         private void pbRicardo_Click(object sender, EventArgs e)
         {
-            NewCreature = new NewCreature("Ricardo", "Combat", 100, 100, 100, 70, 90, 60, new string[4] { "TuAime", "puissance", "CloseCombat", "Seduction" });
+            NewCreature = new NewCreature("Ricardo", "Combat", 100, 100, 100, 70, 90, 60, new int[4] { 15, 16, 17, 18 });
             majInfo();
         }
 
         private void pbPepe_Click(object sender, EventArgs e)
         {
-            NewCreature = new NewCreature("Pepe", "Psy", 80, 80, 75, 95, 65, 90, new string[4] { "RageOn", "SmugFace", "CyberHarcel", "trempette" });
+            NewCreature = new NewCreature("Pepe", "Psy", 80, 80, 75, 95, 65, 90, new int[4] { 5, 6, 7, 1 });
             majInfo();
         }
 
         private void PbWaluigi_Click(object sender, EventArgs e)
         {
-            NewCreature = new NewCreature("Waluigi", "Inconnu", 130, 130, 100, 100, 50, 45, new string[4] { "WaluigiTime", "Waahaha", "Heyeahyeah", "Smash" });
+            NewCreature = new NewCreature("Waluigi", "Inconnu", 130, 130, 100, 100, 50, 45, new int[4] { 28, 29, 30, 31});
             majInfo();
         }
 
@@ -129,6 +129,9 @@ namespace JeuxVideo_MemeLegend
             
         }
 
-        
+        private void ficSelectionOnline_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
     }
 }
