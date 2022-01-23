@@ -175,6 +175,7 @@ namespace JeuxVideo_MemeLegend
             this.BoxJ1.Controls.Add(this.bCap2J1);
             this.BoxJ1.Controls.Add(this.bCap1J1);
             this.BoxJ1.Controls.Add(this.lbJ1);
+            this.BoxJ1.Enabled = false;
             this.BoxJ1.Font = new System.Drawing.Font("Minecraftia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BoxJ1.Location = new System.Drawing.Point(20, 50);
             this.BoxJ1.Name = "BoxJ1";

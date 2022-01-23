@@ -246,11 +246,6 @@ namespace JeuxVideo_MemeLegend
         }*/
        #endregion
 
-        #region processus de debut de partie
-
-
-        #endregion
-
         #region gestion combat serveur side
         private void GestionServeur(object sender, EventArgs e)
         {
@@ -290,7 +285,11 @@ namespace JeuxVideo_MemeLegend
                     MajComplete();
                     changetour();
                     break;
-                case "b":
+                case "atta":
+                    pause();
+                    attaqueonline(Int32.Parse(Message[1]), creaJ2, creaJ1, false);
+                    MajHp();
+                    CheckVie();
                     break;
                 case "hello":
                     MessageBox.Show("hello identifie cote serveur");
@@ -326,6 +325,7 @@ namespace JeuxVideo_MemeLegend
                     break;
                 case "m": //message a afficher
                     tbTexte.Text = Message[1];
+                    MajBoite();
                     break;
                 case "c1": //reception creature renvoie c1
                     joueur2[0] = StringToCrea(Message);
@@ -347,8 +347,37 @@ namespace JeuxVideo_MemeLegend
                     sClient.Send(Encoding.Unicode.GetBytes("c3/" + reponse));
                     MajComplete();
                     break;
+                case "deg"://reception degat
+                    if (Message[1] == "1")
+                    {
+                        creaJ1.HP -= Int32.Parse(Message[2]);
+                    }
+                    if(Message[1] == "2")
+                    {
+                        creaJ2.HP -= Int32.Parse(Message[2]);
+                    }
+                    break;
+                case "stat"://appliquer effet
+                    if (Message[1] == "2")
+                    {
+                        creaJ1.techniques[0].ModifierStat(creaJ1, Message[2], Int32.Parse(Message[3]));
+                    }
+                    if(Message[1] == "1")
+                    {
+                        creaJ1.techniques[0].ModifierStat(creaJ2, Message[2], Int32.Parse(Message[3]));
+                    }
+                    break;
                 case "tour":
                     changetour();
+                    break;
+                case "stop":
+                    pause();
+                    break;
+                case "majboite":
+                    MajBoite();                        
+                    break;
+                case "MajHp":
+                    MajHp();
                     break;
                 case "hello":
                     MessageBox.Show("hello identifie cote client");
@@ -415,28 +444,61 @@ namespace JeuxVideo_MemeLegend
         {
             if(Status)
             {
-                MessageBox.Show("attaque 1");
+                pause();
+                attaqueonline(0, creaJ1, creaJ2, true);
+                MajHp();
+                CheckVie();
             }
             else
             {
-                MessageBox.Show("attaque 1");
+                sClient.Send(Encoding.Unicode.GetBytes("atta/0/"));
             }
                 
         }
 
         private void bCap2J1_Click(object sender, EventArgs e)
         {
-
+            if (Status)
+            {
+                pause();
+                attaqueonline(1, creaJ1, creaJ2, true);
+                MajHp();
+                CheckVie();
+            }
+            else
+            {
+                sClient.Send(Encoding.Unicode.GetBytes("atta/1/"));
+            }
         }
 
         private void bCap3J1_Click(object sender, EventArgs e)
         {
-
+            if (Status)
+            {
+                pause();
+                attaqueonline(2, creaJ1, creaJ2, true);
+                MajHp();
+                CheckVie();
+            }
+            else
+            {
+                sClient.Send(Encoding.Unicode.GetBytes("atta/2/"));
+            }
         }
 
         private void bCap4J1_Click(object sender, EventArgs e)
         {
-
+            if (Status)
+            {
+                pause();
+                attaqueonline(3, creaJ1, creaJ2, true);
+                MajHp();
+                CheckVie();
+            }
+            else
+            {
+                sClient.Send(Encoding.Unicode.GetBytes("atta/3/"));
+            }
         }
 
         private void attaque(int att)
@@ -560,15 +622,22 @@ namespace JeuxVideo_MemeLegend
         {
             if (tour == true)
             {
+
                 BoxJ1.Enabled = true;
-                tbTexte.Text = "au tour du serveur";
+                if(Status)
+                    tbTexte.Text = "au tour du Serveur";
+                else
+                    tbTexte.Text = "au tour du Client";
                 tour = false;
                 
             }
             else
             {
                 BoxJ1.Enabled = false;
-                tbTexte.Text = "au tour du client";
+                if (Status)
+                    tbTexte.Text = "au tour du Client";
+                else
+                    tbTexte.Text = "au tour du Serveur";
                 tour = true;
             }
             if (Status)
@@ -579,47 +648,88 @@ namespace JeuxVideo_MemeLegend
         void pause()
         {
             BoxJ1.Enabled = false;
+            if (Status)
+            {
+                sClient.Send(Encoding.Unicode.GetBytes("stop/"));
+                Thread.Sleep(20);
+            }
+                
         }
 
-        private void Attaquer(int i, Creature J1, Creature J2) // Infliger les degat 
+        private void attaqueonline(int i, NewCreature J1, NewCreature J2, bool SC) //si SC true, attaque dait par serveur sinon vient du client
         {
             int degat;
-            Random Alea = new Random();
-            double dAlea = (double)Alea.Next(80, 120) / 100;
 
             pause();
             tbTexte.Text = (J1.Nom + " utilise " + J1.techniques[i].Nom + " !!!");
+            //sClient.Send(Encoding.Unicode.GetBytes("m/" + J1.Nom + " utilise " + J1.techniques[i].Nom + " !!!"));
+            sClient.Send(Encoding.Unicode.GetBytes("m/y a une attaque !"));
             MajBoite();
 
             degat = J1.techniques[i].genererdegat(J1, J2);
-
             J2.HP -= degat;
+            if(SC == true)//vient du serv
+            {
+                sClient.Send(Encoding.Unicode.GetBytes("stat/2/HP/-" + degat.ToString() + "/"));
+                sClient.Send(Encoding.Unicode.GetBytes("MajHp/"));
+            }
+            else
+            {
+                sClient.Send(Encoding.Unicode.GetBytes("stat/1/HP/-" + degat.ToString() + "/"));
+                sClient.Send(Encoding.Unicode.GetBytes("MajHp/"));
+            }
+            //sClient.Send(Encoding.Unicode.GetBytes("stat/1/HP/"+degat.ToString()+"/")); 
+
             tbTexte.Text = J1.Nom + " inflige " + degat.ToString() + " points de dégats";
+            //sClient.Send(Encoding.Unicode.GetBytes("m/"+J1.Nom + " inflige " + degat.ToString() + " points de dégats/"));
+            sClient.Send(Encoding.Unicode.GetBytes("m/une attaque fait des degat/"));
             MajBoite();
 
             if (J1.techniques[i].tableType(J1.techniques[i].Type, J2.Type) == 2)
             {
                 tbTexte.Text = "C'est super efficace !";
+                sClient.Send(Encoding.Unicode.GetBytes("m/C'est super efficace !"));
                 MajBoite();
             }
             else if (J1.techniques[i].tableType(J1.techniques[i].Type, J2.Type) == 0.5)
             {
                 tbTexte.Text = "Ce n'est pas très efficace";
+                sClient.Send(Encoding.Unicode.GetBytes("m/Ce n'est pas très efficace"));
+
                 MajBoite();
             }
-            J1.techniques[i].AppliquerEffet(J1, J2, tbTexte);
+            if(SC == true)
+            {
+                J1.techniques[i].AppliquerEffet(J1, J2, tbTexte, sClient);
+            }
+            else
+            {
+                J1.techniques[i].AppliquerEffet(J2, J1, tbTexte, sClient);
+            }
+            
         }
 
         private void MajBoite()
         {
             tbTexte.Refresh();
             Application.DoEvents();
-            Thread.Sleep(2000);
+
+            if (Status == true)
+            {
+                sClient.Send(Encoding.Unicode.GetBytes("majboite/"));
+                Thread.Sleep(2000);   
+            }
         }
         private void MajHp()
         {
             LifeJ1.Value = (creaJ1.HP * 100 / creaJ1.HPMax);
             LifeJ2.Value = (creaJ2.HP * 100 / creaJ2.HPMax);
+            if(Status == true)
+            {
+                sClient.Send(Encoding.Unicode.GetBytes("MajHp/"));
+                Thread.Sleep(20);
+            }
+                
         }
 
         private void CheckVie() //return bool si vrai ou pas
@@ -628,6 +738,7 @@ namespace JeuxVideo_MemeLegend
             if (creaJ1.HP == 0)
             {
                 tbTexte.Text = creaJ1.Nom + " est KO !!";
+                sClient.Send(Encoding.Unicode.GetBytes("m/" + creaJ1.Nom + " est KO !!/"));
                 MajBoite();
                 for (int i = 0; i < 3; i++)
                 {
@@ -641,7 +752,8 @@ namespace JeuxVideo_MemeLegend
                     FinPartie(2);
                 else
                 {
-                    tbTexte.Text = "J1, veuillez choisir un nouveau meme !";
+                    tbTexte.Text = "Serveur, veuillez choisir un nouveau meme !";
+                    sClient.Send(Encoding.Unicode.GetBytes("m/Serveur choisi un meme/"));
                     MajBoite();
                     BoxJ1.Enabled = true;
                     //BoxJ2.Enabled = false;
@@ -653,6 +765,7 @@ namespace JeuxVideo_MemeLegend
             else if (creaJ2.HP == 0)
             {
                 tbTexte.Text = creaJ2.Nom + " est KO !!";
+                sClient.Send(Encoding.Unicode.GetBytes("m/" + creaJ2.Nom + " est KO !!/"));
                 MajBoite();
                 for (int i = 0; i < 3; i++)
                 {
@@ -667,6 +780,7 @@ namespace JeuxVideo_MemeLegend
                 else
                 {
                     tbTexte.Text = "J2, veuillez choisir un nouveau meme !";
+                    sClient.Send(Encoding.Unicode.GetBytes("m/Client, veuillez choisir un nouveau meme !/"));
                     MajBoite();
                     BoxJ1.Enabled = false;
                     // bCap1J2.Enabled = bCap2J2.Enabled = bCap3J2.Enabled = bCap4J2.Enabled = false;

@@ -25,7 +25,7 @@ namespace JeuxVideo_MemeLegend
             {"RageOn", new NewCapacite("Rage-On", "Psy", 0, 3, true, 5) },
             {"SmugFace", new NewCapacite("Smug Face", "Neutre", 0, 4, true, 6) },
             {"CyberHarcel", new NewCapacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },
-            {"Invest", new NewCapacite("Cyber-harcèlement", "Psy", 60, 0, true, 7) },
+            {"Invest", new NewCapacite("Investissement", "Neutre", 0, 5, true, 8) },
             {"LanceFlam", new NewCapacite("Lance-Flamme", "Feu", 65, 0, true, 9) },
             {"MeteorTesla", new NewCapacite("Météor Tesla", "Milliardaire", 80, 6, true, 10) },
             {"ClaqueLias", new NewCapacite("Claque de Liasse", "Milliardaire", 60, 0, false, 11) },
