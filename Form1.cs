@@ -30,6 +30,7 @@ namespace JeuxVideo_MemeLegend
             /*sServeur = null;
             sClient = null;
             bBuffer = new byte[256];*/
+            tbServeur.Text = System.Environment.MachineName;
         }
 
         private void bLocal_Click(object sender, EventArgs e)
@@ -133,9 +134,13 @@ namespace JeuxVideo_MemeLegend
 
         private void bRejoindre_Click(object sender, EventArgs e)
         {
+            ficCombatOnline f;
             if (tbServeur.Text.Length > 0)
             {
-
+                f = new ficCombatOnline(tbServeur.Text);
+                Hide();
+                f.ShowDialog();
+                Show();
             }
             else
                 MessageBox.Show("Veuillez mettre un serveur");
